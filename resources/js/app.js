@@ -1,4 +1,5 @@
 import './globals/theme.js'; /* By Sheaf.dev */
+import './globals/modals.js'; /* By Sheaf.dev */
 
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 

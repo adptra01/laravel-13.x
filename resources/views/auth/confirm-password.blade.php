@@ -8,15 +8,15 @@
 
         <div class="space-y-4">
             <x-ui.field>
-                <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-ui.label text="Password" for="password" />
+                <x-ui.input id="password" type="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+                <x-ui.error name="password" />
             </x-ui.field>
 
             <div class="flex items-center justify-end mt-4">
-                <x-primary-button>
+                <x-ui.button color="slate">
                     {{ __('Confirm Password') }}
-                </x-primary-button>
+                </x-ui.button>
             </div>
         </div>
     </form>

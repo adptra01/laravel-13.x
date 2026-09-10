@@ -9,12 +9,13 @@
         </p>
     </header>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+    <x-ui.modal id="confirm-user-deletion">
+        <x-slot:trigger>
+            <x-ui.button color="danger">
+                {{ __('Delete Account') }}
+            </x-ui.button>
+        </x-slot:trigger>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
             @csrf
             @method('delete')
@@ -29,29 +30,26 @@
 
             <div class="mt-6">
                 <x-ui.field>
-                    <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                    <x-text-input
+                    <x-ui.label text="Password" for="password" class="sr-only" />
+                    <x-ui.input
                         id="password"
                         name="password"
                         type="password"
-                        class="mt-1 block w-3/4"
                         placeholder="{{ __('Password') }}"
                     />
-
-                    <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                    <x-ui.error name="password" />
                 </x-ui.field>
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-ui.button variant="ghost" x-on:click="$modal.close('confirm-user-deletion')">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-ui.button>
 
-                <x-danger-button class="ms-3">
+                <x-ui.button color="danger" class="ms-3" as="submit">
                     {{ __('Delete Account') }}
-                </x-danger-button>
+                </x-ui.button>
             </div>
         </form>
-    </x-modal>
+    </x-ui.modal>
 </section>

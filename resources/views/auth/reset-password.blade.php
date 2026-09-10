@@ -4,27 +4,27 @@
 
         <div class="space-y-4">
             <x-ui.field>
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-ui.label text="Email" for="email" />
+                <x-ui.input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="you@example.com" />
+                <x-ui.error name="email" />
             </x-ui.field>
 
             <x-ui.field>
-                <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-ui.label text="Password" for="password" />
+                <x-ui.input id="password" type="password" name="password" required autocomplete="new-password" placeholder="••••••••" />
+                <x-ui.error name="password" />
             </x-ui.field>
 
             <x-ui.field>
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                <x-ui.label text="Confirm Password" for="password_confirmation" />
+                <x-ui.input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="••••••••" />
+                <x-ui.error name="password_confirmation" />
             </x-ui.field>
 
             <div class="flex items-center justify-end mt-4">
-                <x-primary-button>
+                <x-ui.button color="slate">
                     {{ __('Reset Password') }}
-                </x-primary-button>
+                </x-ui.button>
             </div>
         </div>
     </form>

@@ -1,7 +1,11 @@
 {
     "files": {
         "resources/js/utils.js": [
-            "dark-theme"
+            "dark-theme",
+            "modal"
+        ],
+        "resources/js/globals/modals.js": [
+            "modal"
         ]
     },
     "helpers": [],
@@ -13,7 +17,8 @@
             "sidebar",
             "navbar",
             "dropdown",
-            "input"
+            "input",
+            "error"
         ],
         "button": [
             "badge",

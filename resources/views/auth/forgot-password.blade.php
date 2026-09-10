@@ -14,15 +14,15 @@
 
         <div class="space-y-4">
             <x-ui.field>
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-ui.label text="Email" for="email" />
+                <x-ui.input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="you@example.com" />
+                <x-ui.error name="email" />
             </x-ui.field>
 
             <div class="flex items-center justify-end mt-4">
-                <x-primary-button>
+                <x-ui.button color="slate">
                     {{ __('Email Password Reset Link') }}
-                </x-primary-button>
+                </x-ui.button>
             </div>
         </div>
     </form>

@@ -4,15 +4,15 @@
 
         <div class="space-y-4">
             <x-ui.field>
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-ui.label text="Email" for="email" />
+                <x-ui.input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="you@example.com" />
+                <x-ui.error name="email" />
             </x-ui.field>
 
             <x-ui.field>
-                <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-ui.label text="Password" for="password" />
+                <x-ui.input id="password" type="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+                <x-ui.error name="password" />
             </x-ui.field>
 
             <div class="flex items-center justify-between">
