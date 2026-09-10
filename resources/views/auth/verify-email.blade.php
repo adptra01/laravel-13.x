@@ -14,7 +14,7 @@
             @csrf
 
             <div>
-                <x-ui.button color="slate">
+                <x-ui.button type="submit" color="slate">
                     {{ __('Resend Verification Email') }}
                 </x-ui.button>
             </div>

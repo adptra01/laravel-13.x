@@ -28,7 +28,7 @@
                 @endif
             </div>
 
-            <x-ui.button color="slate" class="w-full justify-center">
+            <x-ui.button type="submit" color="slate" class="w-full justify-center">
                 {{ __('Log in') }}
             </x-ui.button>
         </div>

@@ -32,7 +32,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-ui.button color="slate" class="ms-4">
+                <x-ui.button type="submit" color="slate" class="ms-4">
                     {{ __('Register') }}
                 </x-ui.button>
             </div>

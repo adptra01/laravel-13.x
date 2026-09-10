@@ -22,7 +22,7 @@
             </x-ui.field>
 
             <div class="flex items-center justify-end mt-4">
-                <x-ui.button color="slate">
+                <x-ui.button type="submit" color="slate">
                     {{ __('Reset Password') }}
                 </x-ui.button>
             </div>
