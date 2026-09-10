@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="bg-neutral-50 dark:bg-neutral-950">
     <x-ui.layout>
       @include('layouts.navigation')
         <x-ui.layout.main>
