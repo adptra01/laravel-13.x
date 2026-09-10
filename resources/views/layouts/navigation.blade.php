@@ -22,7 +22,7 @@
                 </x-ui.navlist.group>
 
                 <x-ui.navlist.group label="Management">
-                    <x-ui.navlist.item label="Users" icon="users" href="#"
+                    <x-ui.navlist.item label="Users" icon="users" href="{{ route('users.index') }}"
                         :active="request()->is('users')" />
                     <x-ui.navlist.item label="Products" icon="cube" href="#"
                         :active="request()->is('products')" />
