@@ -23,6 +23,12 @@
             <x-ui.layout.header>
                 <x-ui.sidebar.toggle class="md:hidden" />
 
+                @if (isset($header) && $header)
+                    <div class="flex-1 flex items-center justify-between ml-4">
+                        {{ $header }}
+                    </div>
+                @endif
+
                 <div class="flex ml-auto gap-x-3 items-center">
                     {{-- Notification bell --}}
                     <x-ui.button variant="ghost" size="sm" class="relative rounded-full">
