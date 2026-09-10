@@ -1,4 +1,14 @@
 @import './theme.css'; /* By Sheaf.dev */
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */ 
+@custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */
+
+/* Sidebar nav spacing */
+[data-slot="navlist-group"] + [data-slot="navlist-group"] {
+    margin-top: 0.75rem;
+}
+
+[data-slot="navlist-group"] [data-slot="navlist-item"] {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+} 
