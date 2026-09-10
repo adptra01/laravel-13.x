@@ -37,7 +37,7 @@
                         type="password"
                         placeholder="{{ __('Password') }}"
                     />
-                    <x-ui.error name="password" />
+                    <x-ui.error :messages="$errors->userDeletion->get('password')" />
                 </x-ui.field>
             </div>
 
