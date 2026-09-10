@@ -57,6 +57,21 @@
         },
         "heading": {
             "installationTime": 1789061594
+        },
+        "table": {
+            "installationTime": 1789061896
+        },
+        "pagination": {
+            "installationTime": 1789061900
+        },
+        "select": {
+            "installationTime": 1789061902
+        },
+        "popup": {
+            "installationTime": 1789061902
+        },
+        "text": {
+            "installationTime": 1789061904
         }
     }
 }
