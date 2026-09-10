@@ -16,16 +16,20 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
+        $allowedSorts = ['name', 'email', 'created_at'];
+        $sort = in_array($request->sort, $allowedSorts) ? $request->sort : 'created_at';
+        $direction = $request->direction === 'asc' ? 'asc' : 'desc';
+
         $users = User::query()
             ->when($request->search, function ($query, $search) {
                 $query->where('name', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%");
             })
-            ->latest()
+            ->orderBy($sort, $direction)
             ->paginate(10)
             ->withQueryString();
 
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users', 'sort', 'direction'));
     }
 
     /**

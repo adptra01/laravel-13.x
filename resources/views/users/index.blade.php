@@ -52,9 +52,40 @@
                     <table class="w-full text-sm text-left">
                         <thead>
                             <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
-                                <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">User</th>
-                                <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">Email</th>
-                                <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">Joined</th>
+                                @php
+                                    $sortParams = array_filter(['search' => request('search')]);
+                                @endphp
+
+                                <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">
+                                    <a href="{{ route('users.index', array_merge($sortParams, ['sort' => 'name', 'direction' => $sort === 'name' && $direction === 'asc' ? 'desc' : 'asc'])) }}"
+                                       class="inline-flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                        User
+                                        @if ($sort === 'name')
+                                            <x-ui.icon name="{{ $direction === 'asc' ? 'chevron-up' : 'chevron-down' }}" class="size-3" />
+                                        @endif
+                                    </a>
+                                </th>
+
+                                <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">
+                                    <a href="{{ route('users.index', array_merge($sortParams, ['sort' => 'email', 'direction' => $sort === 'email' && $direction === 'asc' ? 'desc' : 'asc'])) }}"
+                                       class="inline-flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                        Email
+                                        @if ($sort === 'email')
+                                            <x-ui.icon name="{{ $direction === 'asc' ? 'chevron-up' : 'chevron-down' }}" class="size-3" />
+                                        @endif
+                                    </a>
+                                </th>
+
+                                <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">
+                                    <a href="{{ route('users.index', array_merge($sortParams, ['sort' => 'created_at', 'direction' => $sort === 'created_at' && $direction === 'asc' ? 'desc' : 'asc'])) }}"
+                                       class="inline-flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                        Joined
+                                        @if ($sort === 'created_at')
+                                            <x-ui.icon name="{{ $direction === 'asc' ? 'chevron-up' : 'chevron-down' }}" class="size-3" />
+                                        @endif
+                                    </a>
+                                </th>
+
                                 <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300 text-right">Actions</th>
                             </tr>
                         </thead>
