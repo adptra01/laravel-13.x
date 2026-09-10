@@ -10,6 +10,7 @@ $variantClasses = match($variant){
     'solid' => '[:where(&)]:size-6',
     'mini' => '[:where(&)]:size-5',
     'micro' => '[:where(&)]:size-4',
+    default => '[:where(&)]:size-6',
 };
 
 $classes = [
