@@ -4,16 +4,13 @@
             <h2 class="font-semibold text-xl text-neutral-800 dark:text-neutral-200 leading-tight">
                 {{ __('Users') }}
             </h2>
-            <x-ui.modal id="create-user">
-                <x-slot:trigger>
-                    <x-ui.button type="submit" color="primary">
-                        <x-ui.icon name="plus" class="size-4" />
-                        Add User
-                    </x-ui.button>
-                </x-slot:trigger>
 
-                @include('users.partials.create-modal')
-            </x-ui.modal>
+            <x-ui.modal.trigger id="create-user">
+                <x-ui.button type="submit" color="primary">
+                    <x-ui.icon name="plus" class="size-4" />
+                    Add User
+                </x-ui.button>
+            </x-ui.modal.trigger>
         </div>
     </x-slot>
 
@@ -80,28 +77,20 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center justify-end gap-2">
-                                            {{-- Edit button --}}
-                                            <x-ui.modal id="edit-user-{{ $user->id }}">
-                                                <x-slot:trigger>
-                                                    <x-ui.button variant="ghost" size="sm">
-                                                        <x-ui.icon name="pencil" class="size-4" />
-                                                    </x-ui.button>
-                                                </x-slot:trigger>
+                                            {{-- Edit trigger --}}
+                                            <x-ui.modal.trigger id="edit-user-{{ $user->id }}">
+                                                <x-ui.button variant="ghost" size="sm">
+                                                    <x-ui.icon name="pencil" class="size-4" />
+                                                </x-ui.button>
+                                            </x-ui.modal.trigger>
 
-                                                @include('users.partials.edit-modal', ['editUser' => $user])
-                                            </x-ui.modal>
-
-                                            {{-- Delete button --}}
+                                            {{-- Delete trigger --}}
                                             @if ($user->id !== auth()->id())
-                                                <x-ui.modal id="delete-user-{{ $user->id }}">
-                                                    <x-slot:trigger>
-                                                        <x-ui.button variant="ghost" size="sm" class="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
-                                                            <x-ui.icon name="trash" class="size-4" />
-                                                        </x-ui.button>
-                                                    </x-slot:trigger>
-
-                                                    @include('users.partials.delete-modal', ['deleteUser' => $user])
-                                                </x-ui.modal>
+                                                <x-ui.modal.trigger id="delete-user-{{ $user->id }}">
+                                                    <x-ui.button variant="ghost" size="sm" class="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+                                                        <x-ui.icon name="trash" class="size-4" />
+                                                    </x-ui.button>
+                                                </x-ui.modal.trigger>
                                             @endif
                                         </div>
                                     </td>
@@ -128,4 +117,125 @@
             </div>
         </div>
     </div>
+
+    {{-- ========== CREATE MODAL ========== --}}
+    <x-ui.modal id="create-user" heading="Create New User" description="Fill in the details to create a new user account." width="md">
+        <form method="POST" action="{{ route('users.store') }}">
+            @csrf
+
+            <div class="space-y-4">
+                <x-ui.field>
+                    <x-ui.label text="Name" for="create_name" />
+                    <x-ui.input id="create_name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" placeholder="Full name" />
+                    <x-ui.error name="name" />
+                </x-ui.field>
+
+                <x-ui.field>
+                    <x-ui.label text="Email" for="create_email" />
+                    <x-ui.input id="create_email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username" placeholder="user@example.com" />
+                    <x-ui.error name="email" />
+                </x-ui.field>
+
+                <x-ui.field>
+                    <x-ui.label text="Password" for="create_password" />
+                    <x-ui.input id="create_password" type="password" name="password" required autocomplete="new-password" placeholder="••••••••" />
+                    <x-ui.error name="password" />
+                </x-ui.field>
+
+                <x-ui.field>
+                    <x-ui.label text="Confirm Password" for="create_password_confirmation" />
+                    <x-ui.input id="create_password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="••••••••" />
+                    <x-ui.error name="password_confirmation" />
+                </x-ui.field>
+            </div>
+
+            <x-slot name="footer">
+                <div class="flex justify-end gap-3">
+                    <x-ui.button variant="outline" x-on:click="$data.close();">
+                        Cancel
+                    </x-ui.button>
+                    <x-ui.button type="submit" color="primary">
+                        Create User
+                    </x-ui.button>
+                </div>
+            </x-slot>
+        </form>
+    </x-ui.modal>
+
+    {{-- ========== EDIT MODALS ========== --}}
+    @foreach ($users as $user)
+        <x-ui.modal :id="'edit-user-' . $user->id" heading="Edit User" description="Update the user's information." width="md">
+            <form method="POST" action="{{ route('users.update', $user) }}">
+                @csrf
+                @method('PATCH')
+
+                <div class="space-y-4">
+                    <x-ui.field>
+                        <x-ui.label text="Name" for="edit_name_{{ $user->id }}" />
+                        <x-ui.input id="edit_name_{{ $user->id }}" type="text" name="name" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" />
+                        <x-ui.error name="name" />
+                    </x-ui.field>
+
+                    <x-ui.field>
+                        <x-ui.label text="Email" for="edit_email_{{ $user->id }}" />
+                        <x-ui.input id="edit_email_{{ $user->id }}" type="email" name="email" value="{{ old('email', $user->email) }}" required autocomplete="username" />
+                        <x-ui.error name="email" />
+                    </x-ui.field>
+
+                    <x-ui.field>
+                        <x-ui.label text="New Password" for="edit_password_{{ $user->id }}" />
+                        <x-ui.input id="edit_password_{{ $user->id }}" type="password" name="password" autocomplete="new-password" placeholder="Leave blank to keep current" />
+                        <x-ui.error name="password" />
+                    </x-ui.field>
+
+                    <x-ui.field>
+                        <x-ui.label text="Confirm Password" for="edit_password_confirmation_{{ $user->id }}" />
+                        <x-ui.input id="edit_password_confirmation_{{ $user->id }}" type="password" name="password_confirmation" autocomplete="new-password" placeholder="••••••••" />
+                        <x-ui.error name="password_confirmation" />
+                    </x-ui.field>
+                </div>
+
+                <x-slot name="footer">
+                    <div class="flex justify-end gap-3">
+                        <x-ui.button variant="outline" x-on:click="$data.close();">
+                            Cancel
+                        </x-ui.button>
+                        <x-ui.button type="submit" color="primary">
+                            Save Changes
+                        </x-ui.button>
+                    </div>
+                </x-slot>
+            </form>
+        </x-ui.modal>
+    @endforeach
+
+    {{-- ========== DELETE MODALS ========== --}}
+    @foreach ($users as $user)
+        @if ($user->id !== auth()->id())
+            <x-ui.modal :id="'delete-user-' . $user->id" heading="Delete User" description="Are you sure? This action cannot be undone." width="md" icon="exclamation-triangle" icon-variant="danger">
+                <div class="flex items-center gap-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-box">
+                    <x-ui.avatar size="md" src="https://api.dicebear.com/10.x/lorelei/svg?seed={{ $user->name }}" circle alt="{{ $user->name }}" />
+                    <div>
+                        <p class="font-medium text-neutral-900 dark:text-white">{{ $user->name }}</p>
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ $user->email }}</p>
+                    </div>
+                </div>
+
+                <x-slot name="footer">
+                    <div class="flex justify-end gap-3">
+                        <x-ui.button variant="outline" x-on:click="$data.close();">
+                            Cancel
+                        </x-ui.button>
+                        <form method="POST" action="{{ route('users.destroy', $user) }}" class="contents">
+                            @csrf
+                            @method('DELETE')
+                            <x-ui.button type="submit" color="danger">
+                                Delete User
+                            </x-ui.button>
+                        </form>
+                    </div>
+                </x-slot>
+            </x-ui.modal>
+        @endif
+    @endforeach
 </x-app-layout>
