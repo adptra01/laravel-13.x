@@ -28,9 +28,9 @@
                 @endif
             </div>
 
-            <x-primary-button class="w-full justify-center">
+            <x-ui.button color="slate" class="w-full justify-center">
                 {{ __('Log in') }}
-            </x-primary-button>
+            </x-ui.button>
         </div>
     </form>
 </x-guest-layout>
