@@ -23,12 +23,6 @@
             <x-ui.layout.header>
                 <x-ui.sidebar.toggle class="md:hidden" />
 
-                @if (isset($header) && $header)
-                    <div class="flex-1 flex items-center justify-between ml-4">
-                        {{ $header }}
-                    </div>
-                @endif
-
                 <div class="flex ml-auto gap-x-3 items-center">
                     {{-- Notification bell --}}
                     <x-ui.button variant="ghost" size="sm" class="relative rounded-full">
@@ -84,7 +78,10 @@
                     </x-ui.dropdown>
                 </div>
             </x-ui.layout.header>
-            <div class="p-6">
+            <div class="p-6 space-y-6">
+                @if (isset($header) && $header)
+                    {{ $header }}
+                @endif
                 {{ $slot }}
             </div>
         </x-ui.layout.main>
