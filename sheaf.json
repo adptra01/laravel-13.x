@@ -1,0 +1,44 @@
+{
+    "project_hash": "c4646c03-12f6-42c7-a47b-61f2a48e4cf6",
+    "components": {
+        "button": {
+            "installationTime": 1789053091
+        },
+        "icon": {
+            "installationTime": 1789053103
+        },
+        "layout": {
+            "installationTime": 1789053172
+        },
+        "sidebar": {
+            "installationTime": 1789053298
+        },
+        "navlist": {
+            "installationTime": 1789053385
+        },
+        "badge": {
+            "installationTime": 1789053387
+        },
+        "brand": {
+            "installationTime": 1789053413
+        },
+        "navbar": {
+            "installationTime": 1789053444
+        },
+        "avatar": {
+            "installationTime": 1789053459
+        },
+        "dropdown": {
+            "installationTime": 1789053809
+        },
+        "theme-switcher": {
+            "installationTime": 1789053845
+        },
+        "kbd": {
+            "installationTime": 1789053870
+        },
+        "checkbox": {
+            "installationTime": 1789058387
+        }
+    }
+}

@@ -1,0 +1,4 @@
+@import './theme.css'; /* By Sheaf.dev */
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */ 
