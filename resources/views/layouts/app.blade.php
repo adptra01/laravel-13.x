@@ -78,10 +78,7 @@
                     </x-ui.dropdown>
                 </div>
             </x-ui.layout.header>
-            <div class="p-6 space-y-6">
-                @if (isset($header) && $header)
-                    {{ $header }}
-                @endif
+            <div class="p-6">
                 {{ $slot }}
             </div>
         </x-ui.layout.main>

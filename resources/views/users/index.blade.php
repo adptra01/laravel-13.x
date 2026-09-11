@@ -1,19 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-neutral-800 dark:text-neutral-200 leading-tight">
-                {{ __('Users') }}
-            </h2>
-
-            <x-ui.modal.trigger id="create-user">
-                <x-ui.button color="primary">
-                    <x-ui.icon name="plus" class="size-4" />
-                    Add User
-                </x-ui.button>
-            </x-ui.modal.trigger>
-        </div>
-    </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             {{-- Flash messages --}}
@@ -31,20 +16,28 @@
 
             {{-- Table container --}}
             <div class="bg-white dark:bg-neutral-800 shadow-sm sm:rounded-box overflow-hidden">
-                {{-- Toolbar: search --}}
+                {{-- Toolbar --}}
                 <div class="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-700">
                     <div class="text-sm text-neutral-600 dark:text-neutral-400">
                         {{ $users->total() }} users total
                     </div>
-                    <form method="GET" action="{{ route('users.index') }}">
-                        <x-ui.input
-                            type="search"
-                            name="search"
-                            value="{{ request('search') }}"
-                            placeholder="Search..."
-                            class="w-64"
-                        />
-                    </form>
+                    <div class="flex items-center gap-3">
+                        <form method="GET" action="{{ route('users.index') }}">
+                            <x-ui.input
+                                type="search"
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Search..."
+                                class="w-64"
+                            />
+                        </form>
+                        <x-ui.modal.trigger id="create-user">
+                            <x-ui.button color="primary">
+                                <x-ui.icon name="plus" class="size-4" />
+                                Add User
+                            </x-ui.button>
+                        </x-ui.modal.trigger>
+                    </div>
                 </div>
 
                 {{-- Table --}}
