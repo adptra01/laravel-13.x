@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -13,11 +12,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    // Profile - Volt full-page components
     Volt::route('/profile', 'profile/edit')
         ->name('profile.edit');
 
-    // Users - Volt full-page component
     Volt::route('/users', 'users/index')
         ->name('users.index');
 });

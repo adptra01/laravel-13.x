@@ -8,25 +8,17 @@ use Livewire\Volt\Volt;
 
 class VoltServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         Volt::mount([
-            resource_path('views/livewire'),
+            resource_path('views/users'),
+            resource_path('views/profile'),
             resource_path('views/pages'),
         ]);
-
-        // Register Livewire components
-        Blade::anonymousComponentPath(resource_path('views/livewire'), 'livewire');
     }
 }
