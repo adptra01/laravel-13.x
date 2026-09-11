@@ -6,6 +6,10 @@ use Illuminate\Validation\Rules\Password;
 use Livewire\Attributes\Url;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
+use function Livewire\Volt\{layout, title};
+
+layout('layouts.app');
+title('Users');
 
 new class extends Component {
     use WithPagination;
@@ -175,7 +179,10 @@ new class extends Component {
 
 ?>
 
-<div>
+<x-app-layout>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div>
     {{-- Flash messages --}}
     <div
         x-data="{ show: false, message: '', type: 'success' }"
@@ -266,8 +273,9 @@ new class extends Component {
                                         </p>
                                         @if ($user->id === auth()->id())
                                             <span class="text-xs text-indigo-600 dark:text-indigo-400">You</span>
-                                        @endif
-                                    </div>
+        @endif
+    </div>
+</x-app-layout>
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
