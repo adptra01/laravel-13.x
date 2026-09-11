@@ -45,7 +45,10 @@
                         <thead>
                             <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
                                 @php
-                                    $sortParams = array_filter(['search' => request('search')]);
+                                    $sortParams = array_filter([
+                                        'search' => request('search'),
+                                        'per_page' => request('per_page'),
+                                    ]);
                                 @endphp
 
                                 <th class="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">
