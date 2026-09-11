@@ -39,7 +39,7 @@
     $value ??= trim($slot->__toString());
 
     $classes = [
-        'grid grid-cols-subgrid group relative overflow-hidden',
+        'grid grid-cols-subgrid items-center group relative overflow-hidden',
         'col-span-2' => $isDefaultDropdownVariant,
         'col-span-3' => ! $isDefaultDropdownVariant,
         'w-full px-2 py-1.5 text-sm transition-colors duration-200 text-start',
@@ -77,7 +77,7 @@
             />
         @endif
 
-       <span class="col-start-2 whitespace-nowrap flex items-center justify-between gap-4_">
+            <span class="col-start-2 whitespace-nowrap flex items-center justify-between gap-4">
                 <span class="flex-1">{{ $slot }}</span>
                 
                 @if(filled($shortcut))

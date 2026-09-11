@@ -40,11 +40,11 @@
 <nav {{ $attributes->class('flex items-center justify-between gap-4 flex-wrap pt-3') }} aria-label="Pagination">
 
     {{-- Left: info + per-page --}}
-    <div class="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+    <div class="flex items-center gap-4 text-sm text-neutral-600 tabular-nums dark:text-neutral-400">
         <span>
-            Showing <span class="font-medium text-neutral-900 dark:text-white">{{ $paginator->firstItem() }}</span>
-            to <span class="font-medium text-neutral-900 dark:text-white">{{ $paginator->lastItem() }}</span>
-            of <span class="font-medium text-neutral-900 dark:text-white">{{ number_format($total) }}</span> results
+            Menampilkan <span class="font-medium text-neutral-900 dark:text-white">{{ $paginator->firstItem() }}</span>
+            –<span class="font-medium text-neutral-900 dark:text-white">{{ $paginator->lastItem() }}</span>
+            dari <span class="font-medium text-neutral-900 dark:text-white">{{ number_format($total) }}</span> data
         </span>
 
         @if ($showPerPage)
@@ -54,16 +54,16 @@
                         <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                     @endif
                 @endforeach
-                <label for="per-page-select" class="sr-only">Items per page</label>
+                <label for="per-page-select" class="sr-only">Data per halaman</label>
                 <select
                     id="per-page-select"
                     name="per_page"
                     onchange="this.form.submit()"
-                    class="text-xs rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-2 py-1.5 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 cursor-pointer"
+                    class="text-xs rounded-box border border-neutral-200 bg-white px-2 py-1.5 text-neutral-700 focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 cursor-pointer dark:border-white/10 dark:bg-neutral-900 dark:text-neutral-300"
                 >
                     @foreach ($perPageOptions as $option)
                         <option value="{{ $option }}" {{ $perPage == $option ? 'selected' : '' }}>
-                            {{ $option }} / page
+                            {{ $option }} / hal.
                         </option>
                     @endforeach
                 </select>
@@ -84,14 +84,14 @@
                     class="flex justify-center items-center size-8 rounded-md text-neutral-300 dark:text-neutral-600 cursor-not-allowed"
                     aria-label="Previous page"
                 >
-                    <x-ui.icon name="chevron-left" class="size-4" />
+                    <x-ui.icon name="ps:caret-left" class="size-4" />
                 </button>
             @else
                 <a href="{{ $buildUrl($currentPage - 1) }}"
                     class="flex justify-center items-center size-8 rounded-md text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-white transition-colors"
                     aria-label="Previous page"
                 >
-                    <x-ui.icon name="chevron-left" class="size-4" />
+                    <x-ui.icon name="ps:caret-left" class="size-4" />
                 </a>
             @endif
 
@@ -103,7 +103,7 @@
                     </div>
                 @else
                     @if ($page == $currentPage)
-                        <div class="flex justify-center items-center size-8 rounded-md text-xs font-medium bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+                        <div class="flex justify-center items-center size-8 rounded-md text-xs font-semibold bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
                             {{ $page }}
                         </div>
                     @else
@@ -123,14 +123,14 @@
                     class="flex justify-center items-center size-8 rounded-md text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-white transition-colors"
                     aria-label="Next page"
                 >
-                    <x-ui.icon name="chevron-right" class="size-4" />
+                    <x-ui.icon name="ps:caret-right" class="size-4" />
                 </a>
             @else
                 <button type="button" disabled
                     class="flex justify-center items-center size-8 rounded-md text-neutral-300 dark:text-neutral-600 cursor-not-allowed"
                     aria-label="Next page"
                 >
-                    <x-ui.icon name="chevron-right" class="size-4" />
+                    <x-ui.icon name="ps:caret-right" class="size-4" />
                 </button>
             @endif
         </div>

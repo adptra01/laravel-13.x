@@ -14,21 +14,23 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(?string $role = null): View
     {
-        return view('auth.login');
+        abort_if($role !== null && ! in_array($role, ['merchant', 'customer'], true), 404);
+
+        return view('auth.login', ['role' => $role]);
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request, ?string $role = null): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended($this->dashboardFor($request->user()));
     }
 
     /**
@@ -43,5 +45,14 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    private function dashboardFor(mixed $user): string
+    {
+        return match ($user?->role) {
+            'merchant' => route('merchant.dashboard', absolute: false),
+            'admin' => route('admin.dashboard', absolute: false),
+            default => route('customer.dashboard', absolute: false),
+        };
     }
 }

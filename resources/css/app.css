@@ -3,6 +3,65 @@
 
 @custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */
 
+/* Color scheme: fixes native scrollbar, inputs, and form controls in dark mode */
+:root {
+    color-scheme: light;
+}
+
+.dark {
+    color-scheme: dark;
+}
+
+/* Sheaf radius tokens as utilities */
+@utility rounded-box {
+    border-radius: var(--radius-box);
+}
+
+@utility rounded-field {
+    border-radius: var(--radius-field);
+}
+
+/* Alpine cloaking (paired with flash-messages x-cloak) */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Brand selection */
+::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+}
+
+/* Tactile feedback: physical push on press */
+[data-slot="button"]:active,
+button[type="submit"]:active,
+a[class*="bg-primary"]:active {
+    transform: translateY(1px);
+}
+
+/* Staggered entrance: apply .animate-rise with style="--index:0..n" */
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-rise {
+    animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--index, 0) * 70ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-rise {
+        animation: none;
+    }
+}
+
 /* Sidebar nav spacing */
 [data-slot="navlist-group"] + [data-slot="navlist-group"] {
     margin-top: 0.75rem;

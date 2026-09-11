@@ -26,3 +26,15 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 docs/*
+
+# AI tooling (agent configs, rules, skills & generated files)
+/.agents
+/.ai
+/.claude
+/.opencode
+/boost.json
+/opencode.json
+AGENTS.md
+CLAUDE.md
+/graphify-out
+/Livewire

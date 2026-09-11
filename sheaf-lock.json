@@ -47,7 +47,8 @@
             "error",
             "select",
             "pagination",
-            "table"
+            "table",
+            "alerts"
         ],
         "button": [
             "badge",
@@ -77,6 +78,9 @@
         ],
         "pagination": [
             "table"
+        ],
+        "heading": [
+            "alerts"
         ]
     }
 }

@@ -1,30 +1,32 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-neutral-600 dark:text-neutral-400">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <div class="mb-6">
+        <p class="font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Verifikasi</p>
+        <h2 class="mt-1.5 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">Verifikasi Email</h2>
+        <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            Terima kasih sudah mendaftar! Klik tautan verifikasi yang baru saja kami kirim ke email Anda. Belum menerima emailnya? Kami akan mengirimkan ulang.
+        </p>
     </div>
 
     @if (session('status'))
-        <div class="font-medium text-sm text-green-600 dark:text-green-400">
+        <div class="mb-4 text-sm font-medium text-zinc-900 dark:text-zinc-100">
             {{ session('status') }}
         </div>
     @endif
 
-    <div class="mt-4 flex items-center justify-between">
+    <div class="mt-4 space-y-3">
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
 
-            <div>
-                <x-ui.button type="submit" color="slate">
-                    {{ __('Resend Verification Email') }}
-                </x-ui.button>
-            </div>
+            <x-ui.button type="submit" class="w-full justify-center">
+                Kirim Ulang Email Verifikasi
+            </x-ui.button>
         </form>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <x-ui.button variant="ghost" as="button" type="submit">
-                {{ __('Log Out') }}
+            <x-ui.button variant="ghost" type="submit" class="w-full justify-center">
+                Keluar
             </x-ui.button>
         </form>
     </div>
