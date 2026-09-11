@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,11 +13,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Profile - Volt full-page components
+    Volt::route('/profile', 'profile/edit')
+        ->name('profile.edit');
 
-    Route::resource('users', UserController::class)->except(['create', 'show', 'edit']);
+    // Users - Volt full-page component
+    Volt::route('/users', 'users/index')
+        ->name('users.index');
 });
 
 require __DIR__.'/auth.php';
