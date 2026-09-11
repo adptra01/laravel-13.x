@@ -15,8 +15,7 @@ class VoltServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Volt::mount([
-            resource_path('views/users'),
-            resource_path('views/profile'),
+            config('view.paths')[0], // resources/views
         ]);
     }
 }
