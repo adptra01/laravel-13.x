@@ -26,7 +26,7 @@ class UserController extends Controller
                     ->orWhere('email', 'like', "%{$search}%");
             })
             ->orderBy($sort, $direction)
-            ->paginate(10)
+            ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
         return view('users.index', compact('users', 'sort', 'direction'));
@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
             'password' => ['nullable', 'confirmed', Password::defaults()],
         ]);
 

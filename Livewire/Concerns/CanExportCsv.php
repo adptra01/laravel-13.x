@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Src\Components\Livewire\Concerns;
 
+use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
 trait CanExportCsv
 {
     /**
      * Generates a CSV string from the given models.
      *
-     * @param  \Illuminate\Support\Collection  $models
+     * @param  Collection  $models
      * @return string
      */
     protected function generateCsv($models)
@@ -45,7 +48,7 @@ trait CanExportCsv
      * Streams the CSV content as a downloadable file.
      *
      * @param  string  $content
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @return StreamedResponse
      */
     protected function streamCsv($content)
     {
@@ -67,8 +70,8 @@ trait CanExportCsv
     /**
      * Exports the given records as a CSV file.
      *
-     * @param  \Illuminate\Support\Collection  $records
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @param  Collection  $records
+     * @return StreamedResponse
      */
     protected function csv($records)
     {
