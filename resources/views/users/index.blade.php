@@ -145,11 +145,9 @@
                 </div>
 
                 {{-- Pagination --}}
-                @if ($users->hasPages())
-                    <div class="px-4 py-3 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
-                        <x-paginator :paginator="$users" />
-                    </div>
-                @endif
+                <div class="px-4 py-3 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
+                    <x-paginator :paginator="$users" />
+                </div>
             </div>
         </div>
     </div>
