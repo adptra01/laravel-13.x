@@ -107,9 +107,19 @@ class OrderController extends Controller
         return view('customer.order.show', compact('order'));
     }
 
-    public function pay(Request $request, Order $order): RedirectResponse
+    public function pay(Order $order): RedirectResponse
     {
         abort_unless($order->customer_id === Auth::user()->customerProfile->id, 403);
+
+        if ($order->payment_status === 'paid') {
+            return redirect()->route('customer.orders.show', $order)
+                ->with('error', 'Pesanan ini sudah dibayar sebelumnya.');
+        }
+
+        if (in_array($order->status, ['cancelled', 'completed'], true)) {
+            return redirect()->route('customer.orders.show', $order)
+                ->with('error', 'Pesanan dalam status ini tidak dapat dibayar.');
+        }
 
         $payment = $order->payments()->latest()->first();
 
@@ -127,6 +137,12 @@ class OrderController extends Controller
     public function cancel(Order $order): RedirectResponse
     {
         abort_unless($order->customer_id === Auth::user()->customerProfile->id, 403);
+
+        if ($order->payment_status === 'paid') {
+            return redirect()->route('customer.orders.show', $order)
+                ->with('error', 'Pesanan yang sudah dibayar tidak dapat dibatalkan.');
+        }
+
         abort_unless($order->status === 'pending', 403);
 
         $order->update(['status' => 'cancelled']);

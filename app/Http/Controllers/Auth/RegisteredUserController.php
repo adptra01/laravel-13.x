@@ -19,10 +19,12 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view for a portal (merchant|customer).
+     * Display the global registration view.
      */
-    public function create(string $role): View
+    public function create(Request $request): View
     {
+        $role = $request->query('role', 'customer');
+
         abort_unless(in_array($role, ['merchant', 'customer'], true), 404);
 
         return view('auth.register', ['role' => $role]);
@@ -33,11 +35,10 @@ class RegisteredUserController extends Controller
      *
      * @throws ValidationException
      */
-    public function store(Request $request, string $role): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        abort_unless(in_array($role, ['merchant', 'customer'], true), 404);
-
-        $request->validate([
+        $validated = $request->validate([
+            'role' => ['required', 'in:merchant,customer'],
             'name' => ['required', 'string', 'max:255'],
             'company_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -46,31 +47,31 @@ class RegisteredUserController extends Controller
             'phone' => ['nullable', 'string', 'max:20'],
         ]);
 
-        $user = DB::transaction(function () use ($request, $role) {
+        $user = DB::transaction(function () use ($validated) {
             $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'role' => $role,
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => $validated['password'],
+                'role' => $validated['role'],
             ]);
 
-            $slug = Str::slug($request->company_name).'-'.Str::lower(Str::random(5));
+            $slug = Str::slug($validated['company_name']).'-'.Str::lower(Str::random(5));
 
-            if ($role === 'merchant') {
+            if ($validated['role'] === 'merchant') {
                 Merchant::create([
                     'user_id' => $user->id,
-                    'company_name' => $request->company_name,
+                    'company_name' => $validated['company_name'],
                     'slug' => $slug,
-                    'address' => $request->address,
-                    'phone' => $request->phone,
+                    'address' => $validated['address'] ?? null,
+                    'phone' => $validated['phone'] ?? null,
                 ]);
             } else {
                 Customer::create([
                     'user_id' => $user->id,
-                    'company_name' => $request->company_name,
+                    'company_name' => $validated['company_name'],
                     'slug' => $slug,
-                    'address' => $request->address,
-                    'phone' => $request->phone,
+                    'address' => $validated['address'] ?? null,
+                    'phone' => $validated['phone'] ?? null,
                 ]);
             }
 
@@ -81,7 +82,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect($this->dashboardFor($role));
+        return redirect($this->dashboardFor($validated['role']));
     }
 
     private function dashboardFor(string $role): string

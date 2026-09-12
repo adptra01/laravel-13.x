@@ -76,7 +76,7 @@
 
                     <x-ui.dropdown position="bottom-end" class="shrink-0">
                         <x-slot:button class="justify-center" aria-label="Menu akun">
-                            <x-ui.avatar size="sm" circle src="https://api.dicebear.com/10.x/lorelei/svg?seed={{ auth()->user()->name ?? '' }}" alt="{{ auth()->user()->name ?? '' }}" />
+                            <x-ui.avatar size="sm" circle :name="auth()->user()->name ?? ''" />
                         </x-slot:button>
                         <x-slot:menu class="w-64">
                             <x-ui.dropdown.group label="Masuk sebagai">
@@ -153,7 +153,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-8 border-t border-neutral-100 pt-6 text-center font-mono text-xs text-neutral-400 dark:border-white/5 dark:text-neutral-500">
+            <div class="mt-8 border-t border-neutral-100 pt-6 text-center text-xs text-neutral-400 dark:border-white/5 dark:text-neutral-500">
                 &copy; {{ date('Y') }} {{ $siteName }}. Hak cipta dilindungi.
             </div>
         </div>

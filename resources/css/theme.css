@@ -1,11 +1,11 @@
 /* KateringKu design tokens — Sheaf UI theming, shadcn/ui color system.
  * Base: zinc monochrome. Primary: zinc-900 (light) / zinc-50 (dark) — no chromatic accent.
- * Typography: Geist (sans) + Geist Mono (numbers & eyebrows). */
+ * Typography: satu keluarga — Geist untuk semuanya (angka memakai tabular-nums). */
 
 @theme inline {
     /* Font family */
     --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-mono: var(--font-sans);
     --default-font-family: var(--font-sans);
 
     /* Base palette: remap neutral -> zinc project-wide */

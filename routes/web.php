@@ -61,8 +61,12 @@ Route::resource('users', UserController::class)->except('show')->middleware(['au
 Route::prefix('merchant')->name('merchant.')->middleware(['auth', 'verified', 'role.merchant'])->group(function () {
     Route::get('/', MerchantDashboardController::class)->name('dashboard');
 
+    Route::post('notifications/read', [MerchantNotificationController::class, 'markAllRead'])
+        ->name('notifications.read');
+
     Route::get('/profile', [MerchantProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [MerchantProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/reapply', [MerchantProfileController::class, 'reapply'])->name('profile.reapply');
 
     Route::resource('menus', MenuController::class)->except('show');
     Route::patch('menus/{menu}/toggle', [MenuController::class, 'toggle'])->name('menus.toggle');

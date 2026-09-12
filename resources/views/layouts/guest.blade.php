@@ -22,15 +22,15 @@
                 <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:28px_28px]" aria-hidden="true"></div>
 
                 <a href="/" class="relative flex items-center gap-2.5" aria-label="Beranda {{ config('app.name') }}">
-                    <span class="grid size-9 place-items-center rounded-md bg-white text-neutral-950">
+                    <span class="grid size-9 place-items-center rounded-md bg-white dark:bg-neutral-900 text-neutral-950">
                         <x-ui.icon name="ps:fork-knife" class="size-4.5" />
                     </span>
                     <span class="text-lg font-semibold tracking-tight text-white">{{ config('app.name', 'Laravel') }}</span>
-                    <span class="font-mono text-[11px] text-neutral-500">/katering-kantor</span>
+                   
                 </a>
 
                 <div class="relative">
-                    <p class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-neutral-300">
+                    <p class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white dark:bg-neutral-900/5 px-3 py-1 text-[11px] uppercase tracking-widest text-neutral-300">
                         <span class="size-1.5 animate-pulse rounded-full bg-zinc-400"></span>
                         Marketplace katering B2B
                     </p>
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
 
-                <p class="relative font-mono text-xs text-neutral-500">&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}</p>
+                <p class="relative text-xs text-neutral-500 dark:text-neutral-400">&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}</p>
             </div>
 
             {{-- Panel form --}}

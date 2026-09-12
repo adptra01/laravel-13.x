@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-6">
-        <p class="font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Lupa Password</p>
+        <p class="text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Lupa Password</p>
         <h2 class="mt-1.5 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">Lupa Password</h2>
         <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
             Masukkan alamat email Anda, kami akan mengirimkan tautan untuk mengatur ulang password.

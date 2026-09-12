@@ -12,20 +12,29 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register/{role}', [RegisteredUserController::class, 'create'])
-        ->whereIn('role', ['merchant', 'customer'])
+    // Register global — peran dipilih di dalam form
+    Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
-    Route::post('register/{role}', [RegisteredUserController::class, 'store'])
-        ->whereIn('role', ['merchant', 'customer']);
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login/{role?}', [AuthenticatedSessionController::class, 'create'])
-        ->whereIn('role', ['merchant', 'customer'])
+    // URL lama dengan role di path → diteruskan sebagai query
+    Route::get('register/{role}', function (string $role) {
+        return redirect()->to(route('register').'?role='.($role === 'merchant' ? 'merchant' : 'customer'));
+    });
+
+    // Login global — redirect mengikuti peran akun (merchant / customer / admin)
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
-    Route::post('login/{role?}', [AuthenticatedSessionController::class, 'store'])
-        ->whereIn('role', ['merchant', 'customer']);
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
+    // URL lama portal → login global
+    Route::get('login/{role}', function () {
+        return redirect()->route('login');
+    })->whereIn('role', ['merchant', 'customer']);
+
+    // Reset & lupa password — global untuk semua peran
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
 

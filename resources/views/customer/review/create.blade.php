@@ -5,14 +5,14 @@
             <span class="mx-auto grid size-14 place-items-center rounded-box bg-zinc-950 shadow-sm">
                 <x-ui.icon name="ps:star" variant="fill" class="size-7 !text-amber-400" />
             </span>
-            <p class="mt-4 font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Ulasan pesanan</p>
-            <h1 class="mt-1.5 text-xl font-semibold tracking-tight text-neutral-900 sm:text-2xl">Beri Rating</h1>
-            <p class="mt-1 text-sm text-neutral-500">
-                Pesanan <span class="font-mono text-xs">#{{ $order->id }}</span> dari <span class="font-medium text-neutral-700">{{ $order->merchant?->company_name }}</span>
+            <p class="mt-4 text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Ulasan pesanan</p>
+            <h1 class="mt-1.5 text-xl font-semibold tracking-tight text-neutral-900 dark:text-white sm:text-2xl">Beri Rating</h1>
+            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                Pesanan <span class="text-xs">#{{ $order->id }}</span> dari <span class="font-medium text-neutral-700 dark:text-neutral-300">{{ $order->merchant?->company_name }}</span>
             </p>
         </header>
 
-        <div class="rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm sm:p-8">
+        <div class="rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 p-6 shadow-sm sm:p-8">
             <form method="POST" action="{{ route('customer.reviews.store', $order) }}" class="space-y-6">
                 @csrf
 
@@ -23,53 +23,25 @@
                         @for ($i = 1; $i <= 5; $i++)
                             <button type="button" @click="rating = {{ $i }}" aria-label="{{ $i }} bintang"
                                 class="rounded-lg p-1 transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400">
-                                <x-ui.icon name="ps:star" variant="fill" class="size-9 text-neutral-300" />
+                                <x-ui.icon name="ps:star" variant="fill" class="size-9"
+                                    :class="rating >= {{ $i }} ? 'text-amber-400' : 'text-neutral-300 dark:text-neutral-600'" />
                             </button>
                         @endfor
                         <input type="hidden" name="rating" x-model="rating" value="5" />
                     </div>
-                    <p class="mt-1 text-sm text-neutral-600" x-text="['Sangat buruk','Buruk','Cukup','Bagus','Sangat bagus'][rating - 1]"></p>
+                    <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400" x-text="['Sangat buruk','Buruk','Cukup','Bagus','Sangat bagus'][rating - 1]"></p>
                     <x-ui.error :messages="$errors->get('rating')" class="mt-2" />
                 </div>
-
-                {{-- Star color sync --}}
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const control = document.querySelector('[x-data*="rating"]');
-                        if (!control) return;
-
-                        const updateStars = () => {
-                            const rating = control._x_dataStack[0].rating;
-
-                            control.querySelectorAll('[data-slot="icon"]').forEach((icon, idx) => {
-                                if (idx < rating) {
-                                    icon.classList.remove('text-neutral-300', 'dark:text-neutral-600');
-                                    icon.classList.add('text-amber-400');
-                                } else {
-                                    icon.classList.remove('text-amber-400');
-                                    icon.classList.add('text-neutral-300', 'dark:text-neutral-600');
-                                }
-                            });
-                        };
-
-                        control.querySelectorAll('button').forEach((btn) => {
-                            btn.addEventListener('click', () => setTimeout(updateStars, 0));
-                        });
-
-                        setTimeout(updateStars, 0);
-                    });
-                </script>
 
                 {{-- Menu --}}
                 <div>
                     <x-ui.label for="menu_id">Menu yang dipesan <span class="font-normal text-neutral-400">(opsional)</span></x-ui.label>
-                    <select name="menu_id" id="menu_id"
-                        class="mt-1.5 min-h-10 w-full rounded-box border border-neutral-200 bg-white px-3.5 text-sm text-neutral-900 transition-colors focus:border-neutral-900 focus:outline-none">
+                    <x-ui.select id="menu_id" name="menu_id" class="mt-1.5 w-full" :value="old('menu_id')">
                         <option value="">— Pilih menu —</option>
                         @foreach ($order->items as $item)
-                            <option value="{{ $item->menu_id }}" @selected(old('menu_id') == $item->menu_id)>{{ $item->menu?->name ?? 'Menu #'.$item->menu_id }}</option>
+                            <option value="{{ $item->menu_id }}">{{ $item->menu?->name ?? 'Menu #'.$item->menu_id }}</option>
                         @endforeach
-                    </select>
+                    </x-ui.select>
                     <x-ui.error :messages="$errors->get('menu_id')" class="mt-2" />
                 </div>
 
@@ -81,7 +53,7 @@
                 </div>
 
                 {{-- Actions --}}
-                <div class="flex items-center justify-end gap-3 border-t border-neutral-100 pt-4">
+                <div class="flex items-center justify-end gap-3 border-t border-neutral-100 dark:border-white/5 pt-4">
                     <x-ui.button as="a" href="{{ route('customer.orders.show', $order) }}" variant="outline">Kembali</x-ui.button>
                     <x-ui.button type="submit" color="primary" icon="ps:star">
                         Kirim Rating

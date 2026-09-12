@@ -1,8 +1,8 @@
-<x-layouts.merchant title="Tambah Menu">
+<x-layouts.panel title="Tambah Menu">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Katalog" title="Tambah Menu" description="Tambahkan menu katering baru untuk usaha Anda." />
 
-        <div class="max-w-2xl rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-neutral-900">
+        <div class=" rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <form method="POST" action="{{ route('merchant.menus.store') }}" enctype="multipart/form-data" class="space-y-5">
                 @csrf
 
@@ -46,7 +46,7 @@
                 </x-ui.field>
 
                 <div class="flex items-center gap-3">
-                    <x-ui.checkbox id="is_active" name="is_active" :checked="old('is_active', 1)" />
+                    <x-ui.checkbox id="is_active" name="is_active" :checked="$errors->any() ? old('is_active') == 1 : true" />
                     <x-ui.label for="is_active" class="!mb-0">Aktif (tampil di customer)</x-ui.label>
                 </div>
 
@@ -57,4 +57,4 @@
             </form>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

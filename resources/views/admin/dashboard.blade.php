@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-layouts.panel>
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Ringkasan" title="Dashboard Admin" description="Kesehatan platform {{ config('app.name') }} — user, merchant, pesanan, dan pendapatan.">
             <x-slot:actions>
@@ -30,7 +30,7 @@
             <div class="overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm xl:col-span-3 dark:border-white/10 dark:bg-neutral-900">
                 <div class="flex items-center justify-between border-b border-neutral-100 px-5 py-3.5 dark:border-white/5">
                     <h2 class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">Pesanan Terbaru</h2>
-                    <span class="font-mono text-[11px] text-neutral-400">{{ count($recentOrders) }} data</span>
+                    <span class="text-[11px] text-neutral-400">{{ count($recentOrders) }} data</span>
                 </div>
                 <x-ui.table>
                     <x-ui.table.header>
@@ -43,10 +43,10 @@
                     <tbody>
                         @forelse ($recentOrders as $order)
                             <x-ui.table.row>
-                                <x-ui.table.cell class="font-mono text-xs text-neutral-500 dark:text-neutral-400">#{{ $order->id }}</x-ui.table.cell>
+                                <x-ui.table.cell class="text-xs text-neutral-500 dark:text-neutral-400">#{{ $order->id }}</x-ui.table.cell>
                                 <x-ui.table.cell class="font-medium text-neutral-900 dark:text-white">{{ $order->customer?->company_name ?? '-' }}</x-ui.table.cell>
                                 <x-ui.table.cell class="text-neutral-600 dark:text-neutral-400">{{ $order->merchant?->company_name ?? '-' }}</x-ui.table.cell>
-                                <x-ui.table.cell class="font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($order->total_price, 0, ',', '.') }}</x-ui.table.cell>
+                                <x-ui.table.cell class="text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($order->total_price, 0, ',', '.') }}</x-ui.table.cell>
                                 <x-ui.table.cell>
                                     <x-ui.badge color="{{ match ($order->status) {
                                         'pending' => 'amber',
@@ -111,4 +111,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.panel>

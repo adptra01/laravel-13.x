@@ -1,8 +1,8 @@
-<x-layouts.merchant title="Ubah Menu">
+<x-layouts.panel title="Ubah Menu">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Katalog" title="Ubah Menu" description="Perbarui informasi menu {{ $menu->name }}." />
 
-        <div class="max-w-2xl rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-neutral-900">
+        <div class="rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <form method="POST" action="{{ route('merchant.menus.update', $menu) }}" enctype="multipart/form-data" class="space-y-5">
                 @csrf
                 @method('PUT')
@@ -52,7 +52,7 @@
                 </x-ui.field>
 
                 <div class="flex items-center gap-3">
-                    <x-ui.checkbox id="is_active" name="is_active" :checked="old('is_active', $menu->is_active)" />
+                    <x-ui.checkbox id="is_active" name="is_active" :checked="$errors->any() ? old('is_active') == 1 : $menu->is_active" />
                     <x-ui.label for="is_active" class="!mb-0">Aktif (tampil di customer)</x-ui.label>
                 </div>
 
@@ -63,4 +63,4 @@
             </form>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

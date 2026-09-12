@@ -5,7 +5,7 @@
     <div class="space-y-10">
 
         {{-- ======= MERCHANT COVER & PROFILE ======= --}}
-        <section class="overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm" aria-label="Profil katering">
+        <section class="overflow-hidden rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 shadow-sm" aria-label="Profil katering">
             <div class="relative h-32 bg-zinc-950 sm:h-44" aria-hidden="true">
                 <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px]"></div>
             </div>
@@ -15,7 +15,7 @@
                     <div class="flex items-end gap-4">
                         @if ($merchant->logo)
                             <img src="{{ asset('storage/'.$merchant->logo) }}" alt="Logo {{ $merchant->company_name }}"
-                                class="size-20 rounded-box border-4 border-white bg-white object-contain shadow-sm" />
+                                class="size-20 rounded-box border-4 border-white bg-white dark:bg-neutral-900 object-contain shadow-sm" />
                         @else
                             <span class="grid size-20 place-items-center rounded-box border-4 border-white bg-zinc-100 shadow-sm">
                                 <span class="text-3xl font-semibold tracking-tight text-zinc-900">{{ str($merchant->company_name)->substr(0, 1) }}</span>
@@ -46,17 +46,17 @@
                 @endif
 
                 <dl class="mt-6 grid max-w-lg grid-cols-3 gap-3">
-                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50/60 px-4 py-3">
+                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5 px-4 py-3">
                         <dt class="text-[11px] font-medium uppercase tracking-wider text-zinc-500">Menu aktif</dt>
-                        <dd class="mt-0.5 font-mono text-xl font-semibold tabular-nums text-neutral-900">{{ $menus->total() }}</dd>
+                        <dd class="mt-0.5 text-xl font-semibold tabular-nums text-neutral-900 dark:text-white">{{ $menus->total() }}</dd>
                     </div>
-                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50/60 px-4 py-3">
+                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5 px-4 py-3">
                         <dt class="text-[11px] font-medium uppercase tracking-wider text-zinc-500">Rating</dt>
-                        <dd class="mt-0.5 font-mono text-xl font-semibold tabular-nums text-neutral-900">{{ number_format($avgRating, 1) }}</dd>
+                        <dd class="mt-0.5 text-xl font-semibold tabular-nums text-neutral-900 dark:text-white">{{ number_format($avgRating, 1) }}</dd>
                     </div>
-                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50/60 px-4 py-3">
+                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5 px-4 py-3">
                         <dt class="text-[11px] font-medium uppercase tracking-wider text-zinc-500">Ulasan</dt>
-                        <dd class="mt-0.5 font-mono text-xl font-semibold tabular-nums text-neutral-900">{{ $reviewCount }}</dd>
+                        <dd class="mt-0.5 text-xl font-semibold tabular-nums text-neutral-900 dark:text-white">{{ $reviewCount }}</dd>
                     </div>
                 </dl>
             </div>
@@ -65,13 +65,13 @@
         {{-- ======= MENUS ======= --}}
         <section aria-labelledby="menus-heading">
             <div class="border-b border-zinc-200/70 pb-3">
-                <span class="font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500"># Daftar menu</span>
+                <span class="text-[11px] font-medium uppercase tracking-widest text-zinc-500"># Daftar menu</span>
                 <h2 id="menus-heading" class="text-lg font-semibold tracking-tight text-zinc-950 sm:text-xl">Menu Tersedia ({{ $menus->total() }})</h2>
             </div>
 
             <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @forelse ($menus as $menu)
-                    <article class="flex flex-col overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm transition-colors hover:border-neutral-300">
+                    <article class="flex flex-col overflow-hidden rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 shadow-sm transition-colors hover:border-neutral-300">
                         <div class="aspect-[4/3] overflow-hidden bg-neutral-100">
                             @if ($menu->image)
                                 <img src="{{ asset('storage/'.$menu->image) }}" alt="{{ $menu->name }}" class="h-full w-full object-cover" loading="lazy" />
@@ -83,15 +83,15 @@
                         </div>
                         <div class="flex flex-col gap-2 p-5">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-xs font-medium text-neutral-600">{{ $menu->category }}</span>
-                                <span class="font-mono text-[11px] text-neutral-400">Stok {{ $menu->stock }}</span>
+                                <span class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5 px-2.5 py-0.5 text-xs font-medium text-neutral-600 dark:text-neutral-400">{{ $menu->category }}</span>
+                                <span class="text-[11px] text-neutral-400">Stok {{ $menu->stock }}</span>
                             </div>
-                            <h3 class="font-semibold tracking-tight text-neutral-900">{{ $menu->name }}</h3>
+                            <h3 class="font-semibold tracking-tight text-neutral-900 dark:text-white">{{ $menu->name }}</h3>
                             @if ($menu->description)
-                                <p class="line-clamp-2 text-sm text-neutral-500">{{ $menu->description }}</p>
+                                <p class="line-clamp-2 text-sm text-neutral-500 dark:text-neutral-400">{{ $menu->description }}</p>
                             @endif
                             <div class="mt-auto flex items-center justify-between gap-2 pt-2">
-                                <p class="font-mono text-base font-semibold tabular-nums text-neutral-900">Rp {{ number_format($menu->price, 0, ',', '.') }}</p>
+                                <p class="text-base font-semibold tabular-nums text-neutral-900 dark:text-white">Rp {{ number_format($menu->price, 0, ',', '.') }}</p>
                                 <a href="{{ route('customer.orders.create', $menu) }}">
                                     <x-ui.button size="sm" icon="ps:shopping-cart">
                                         Pesan
@@ -101,11 +101,11 @@
                         </div>
                     </article>
                 @empty
-                    <div class="col-span-full rounded-box border border-neutral-200/70 bg-white px-6 py-16 text-center shadow-sm">
-                        <x-ui.icon name="ps:clipboard-text" class="mx-auto size-10 text-neutral-300" />
-                        <p class="mt-4 text-sm font-semibold tracking-tight text-neutral-900">Belum ada menu tersedia</p>
-                        <p class="mt-1 text-sm text-neutral-500">Katering ini belum menambahkan menu. Coba katering lain!</p>
-                    </div>
+                    <x-ui.empty class="col-span-full rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 px-6 py-16 shadow-sm">
+                        <x-ui.icon name="ps:clipboard-text" class="size-10 text-neutral-300 dark:text-neutral-600" />
+                        <p class="mt-4 text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">Belum ada menu tersedia</p>
+                        <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Katering ini belum menambahkan menu. Coba katering lain!</p>
+                    </x-ui.empty>
                 @endforelse
             </div>
 

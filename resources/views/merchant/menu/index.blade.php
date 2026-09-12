@@ -1,4 +1,4 @@
-<x-layouts.merchant title="Menu Katering">
+<x-layouts.panel title="Menu Katering">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Katalog" title="Menu Katering" description="{{ $menus->total() }} menu total — kelola daftar menu yang tampil ke customer.">
             <x-slot:actions>
@@ -57,8 +57,8 @@
                             <x-ui.table.cell>
                                 <x-ui.badge>{{ $menu->category }}</x-ui.badge>
                             </x-ui.table.cell>
-                            <x-ui.table.cell class="font-mono text-xs whitespace-nowrap text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($menu->price, 0, ',', '.') }}</x-ui.table.cell>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">{{ $menu->stock }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs whitespace-nowrap text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($menu->price, 0, ',', '.') }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-600 tabular-nums dark:text-neutral-400">{{ $menu->stock }}</x-ui.table.cell>
                             <x-ui.table.cell>
                                 <form method="POST" action="{{ route('merchant.menus.toggle', $menu) }}">
                                     @csrf
@@ -88,7 +88,7 @@
                             <x-ui.empty>
                                 <x-ui.icon name="ps:clipboard-text" class="size-8 text-neutral-300 dark:text-neutral-600" />
                                 <p class="mt-2 text-sm font-medium text-neutral-700 dark:text-neutral-300">Belum ada menu</p>
-                                <p class="text-xs text-neutral-500">Mulai dengan menambahkan menu katering pertama Anda.</p>
+                                <p class="text-xs text-neutral-500 dark:text-neutral-400">Mulai dengan menambahkan menu katering pertama Anda.</p>
                             </x-ui.empty>
                         </x-ui.table.empty>
                     @endforelse
@@ -96,4 +96,4 @@
             </x-ui.table>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-layouts.panel>
     <div class="mx-auto max-w-7xl space-y-6">
         <x-flash-messages />
 
@@ -7,6 +7,17 @@
         <div class="max-w-2xl overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <form method="POST" action="{{ route('users.store') }}" class="space-y-4 p-6">
                 @csrf
+
+                <x-ui.field>
+                    <x-ui.label text="Peran" for="role" :required="true" />
+                    <x-ui.select id="role" name="role" class="w-full" :value="old('role', 'customer')">
+                        <option value="customer">Customer — kantor/perusahaan</option>
+                        <option value="merchant">Merchant — penyedia katering</option>
+                        <option value="admin">Admin</option>
+                    </x-ui.select>
+                    <p class="mt-1 text-xs text-neutral-400">Profil domain (kantor/usaha) dibuat otomatis mengikuti peran.</p>
+                    <x-ui.error name="role" />
+                </x-ui.field>
 
                 <x-ui.field>
                     <x-ui.label text="Nama" for="name" :required="true" />
@@ -36,10 +47,10 @@
                         Batal
                     </x-ui.button>
                     <x-ui.button type="submit" icon="ps:check">
-                        Simpan
+                        Tambah Pengguna
                     </x-ui.button>
                 </div>
             </form>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.panel>

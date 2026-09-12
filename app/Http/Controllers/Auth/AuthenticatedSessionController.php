@@ -12,19 +12,18 @@ use Illuminate\View\View;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Display the global login view.
      */
-    public function create(?string $role = null): View
+    public function create(): View
     {
-        abort_if($role !== null && ! in_array($role, ['merchant', 'customer'], true), 404);
-
-        return view('auth.login', ['role' => $role]);
+        return view('auth.login');
     }
 
     /**
      * Handle an incoming authentication request.
+     * Redirect mengikuti peran akun: merchant, customer, atau admin.
      */
-    public function store(LoginRequest $request, ?string $role = null): RedirectResponse
+    public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 

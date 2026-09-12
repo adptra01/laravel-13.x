@@ -41,4 +41,26 @@ class ProfileController extends Controller
 
         return redirect()->route('merchant.profile.edit')->with('saved', 'Profil merchant berhasil diperbarui.');
     }
+
+    /**
+     * Merchant yang ditolak memperbaiki profil lalu mengajukan ulang verifikasi.
+     */
+    public function reapply(): RedirectResponse
+    {
+        $merchant = Auth::user()->merchantProfile()->firstOrFail();
+
+        abort_if($merchant->verification_status === 'verified', 409, 'Merchant sudah terverifikasi.');
+
+        if ($merchant->verification_status !== 'rejected') {
+            return back()->with('error', 'Ajukan ulang hanya tersedia untuk merchant yang ditolak.');
+        }
+
+        $merchant->update([
+            'verification_status' => 'pending',
+            'rejection_reason' => null,
+        ]);
+
+        return redirect()->route('merchant.profile.edit')
+            ->with('saved', 'Pengajuan verifikasi dikirim ulang. Menunggu peninjauan admin.');
+    }
 }

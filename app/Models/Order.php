@@ -28,6 +28,30 @@ class Order extends Model
 
     public const STATUS_FLOW = ['pending', 'confirmed', 'cooking', 'delivered', 'completed'];
 
+    public const STATUS_LABELS = [
+        'pending' => 'Menunggu Konfirmasi',
+        'confirmed' => 'Dikonfirmasi',
+        'cooking' => 'Dimasak',
+        'delivered' => 'Terkirim',
+        'completed' => 'Selesai',
+        'cancelled' => 'Dibatalkan',
+    ];
+
+    /**
+     * Status berikutnya yang sah menurut STATUS_FLOW, atau null jika
+     * pesanan sudah final (selesai) atau di luar alur (dibatalkan).
+     */
+    public function nextStatus(): ?string
+    {
+        $index = array_search($this->status, self::STATUS_FLOW, true);
+
+        if ($index === false) {
+            return null;
+        }
+
+        return self::STATUS_FLOW[$index + 1] ?? null;
+    }
+
     protected function casts(): array
     {
         return [

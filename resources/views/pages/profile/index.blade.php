@@ -116,7 +116,7 @@ $deleteUser = function (): void {
 
 ?>
 
-<x-app-layout>
+<x-layouts.panel>
     @volt('profile.edit')
         <div class="mx-auto max-w-7xl space-y-6">
             <x-flash-messages />
@@ -308,4 +308,4 @@ $deleteUser = function (): void {
             </div>
         </div>
     @endvolt
-</x-app-layout>
+</x-layouts.panel>

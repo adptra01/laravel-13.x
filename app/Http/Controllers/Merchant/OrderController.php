@@ -39,12 +39,22 @@ class OrderController extends Controller
     {
         abort_unless($order->merchant_id === Auth::user()->merchantProfile->id, 403);
 
-        $request->validate([
+        $validated = $request->validate([
             'status' => ['required', Rule::in(Order::STATUS_FLOW)],
         ]);
 
-        $order->update(['status' => $request->status]);
+        $nextStatus = $order->nextStatus();
 
-        return back()->with('saved', "Status pesanan diubah menjadi {$request->status}.");
+        if ($nextStatus === null) {
+            return back()->with('error', 'Pesanan dalam status ini tidak dapat diubah lagi.');
+        }
+
+        if ($validated['status'] !== $nextStatus) {
+            return back()->with('error', 'Transisi tidak valid — pesanan harus dilanjutkan ke "'.Order::STATUS_LABELS[$nextStatus].'".');
+        }
+
+        $order->update(['status' => $validated['status']]);
+
+        return back()->with('saved', 'Status pesanan diperbarui menjadi "'.Order::STATUS_LABELS[$validated['status']].'".');
     }
 }

@@ -1,8 +1,8 @@
-<x-layouts.merchant title="Invoice">
+<x-layouts.panel title="Invoice">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Penagihan" title="Invoice" description="{{ $invoices->total() }} invoice total — invoice terbit otomatis setiap customer memesan.">
             <x-slot:actions>
-                <span class="font-mono text-[11px] text-neutral-400">{{ $invoices->total() }} data</span>
+                <span class="text-[11px] text-neutral-400">{{ $invoices->total() }} data</span>
             </x-slot:actions>
         </x-page-header>
 
@@ -19,10 +19,10 @@
                 <tbody>
                     @forelse ($invoices as $invoice)
                         <x-ui.table.row>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-500 dark:text-neutral-400">{{ $invoice->invoice_number }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-500 dark:text-neutral-400">{{ $invoice->invoice_number }}</x-ui.table.cell>
                             <x-ui.table.cell class="font-medium text-neutral-900 dark:text-white">{{ $invoice->order?->customer?->company_name ?? '-' }}</x-ui.table.cell>
                             <x-ui.table.cell class="whitespace-nowrap text-neutral-600 dark:text-neutral-400">{{ $invoice->issued_at->format('d M Y') }}</x-ui.table.cell>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($invoice->total, 0, ',', '.') }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($invoice->total, 0, ',', '.') }}</x-ui.table.cell>
                             <x-ui.table.cell>
                                 <x-ui.badge color="{{ match ($invoice->status) {
                                     'paid' => null,
@@ -58,4 +58,4 @@
             </x-ui.table>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

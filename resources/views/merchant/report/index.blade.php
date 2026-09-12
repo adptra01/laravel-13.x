@@ -1,4 +1,4 @@
-<x-layouts.merchant title="Laporan Keuangan">
+<x-layouts.panel title="Laporan Keuangan">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Analitik" title="Laporan Keuangan" description="Ringkasan pendapatan {{ $start->format('d M Y') }} — {{ $end->format('d M Y') }}.">
             <x-slot:actions>
@@ -34,7 +34,7 @@
         <div class="overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <div class="flex items-center justify-between border-b border-neutral-100 px-5 py-3.5 dark:border-white/5">
                 <h2 class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">Pendapatan Harian</h2>
-                <span class="font-mono text-[11px] text-neutral-400">{{ count($dailyRevenue) }} hari</span>
+                <span class="text-[11px] text-neutral-400">{{ count($dailyRevenue) }} hari</span>
             </div>
             <x-ui.table>
                 <x-ui.table.header>
@@ -45,7 +45,7 @@
                     @forelse ($dailyRevenue as $date => $total)
                         <x-ui.table.row>
                             <x-ui.table.cell class="text-neutral-600 dark:text-neutral-400">{{ \Carbon\Carbon::parse($date)->format('d M Y') }}</x-ui.table.cell>
-                            <x-ui.table.cell class="text-right font-mono text-xs font-medium tabular-nums text-neutral-900 dark:text-white">Rp {{ number_format($total, 0, ',', '.') }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-right text-xs font-medium tabular-nums text-neutral-900 dark:text-white">Rp {{ number_format($total, 0, ',', '.') }}</x-ui.table.cell>
                         </x-ui.table.row>
                     @empty
                         <x-ui.table.empty>
@@ -64,7 +64,7 @@
         <div class="overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <div class="flex items-center justify-between border-b border-neutral-100 px-5 py-3.5 dark:border-white/5">
                 <h2 class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">Detail Transaksi</h2>
-                <span class="font-mono text-[11px] text-neutral-400">{{ count($orders) }} data</span>
+                <span class="text-[11px] text-neutral-400">{{ count($orders) }} data</span>
             </div>
             <x-ui.table>
                 <x-ui.table.header>
@@ -77,7 +77,7 @@
                 <tbody>
                     @forelse ($orders as $order)
                         <x-ui.table.row>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-500 dark:text-neutral-400">#{{ $order->id }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-500 dark:text-neutral-400">#{{ $order->id }}</x-ui.table.cell>
                             <x-ui.table.cell class="font-medium text-neutral-900 dark:text-white">{{ $order->customer?->company_name ?? '-' }}</x-ui.table.cell>
                             <x-ui.table.cell class="whitespace-nowrap text-neutral-600 dark:text-neutral-400">{{ $order->order_date->format('d M Y') }}</x-ui.table.cell>
                             <x-ui.table.cell>
@@ -97,7 +97,7 @@
                                     default => ucfirst($order->status),
                                 } }}</x-ui.badge>
                             </x-ui.table.cell>
-                            <x-ui.table.cell class="text-right font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($order->total_price, 0, ',', '.') }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-right text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($order->total_price, 0, ',', '.') }}</x-ui.table.cell>
                         </x-ui.table.row>
                     @empty
                         <x-ui.table.empty>
@@ -112,4 +112,4 @@
             </x-ui.table>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

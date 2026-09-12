@@ -12,7 +12,7 @@
                 </span>
                 <span class="font-medium">{{ count($recommended) }}+ katering terverifikasi siap melayani kantor Anda hari ini.</span>
             </div>
-            <span class="hidden font-mono text-[11px] text-neutral-400 sm:inline dark:text-neutral-500">{{ now()->translatedFormat('d M Y') }}</span>
+            <span class="hidden text-[11px] text-neutral-400 sm:inline dark:text-neutral-500">{{ now()->translatedFormat('d M Y') }}</span>
         </div>
 
         {{-- ======= HERO ======= --}}
@@ -50,15 +50,15 @@
                 <div class="grid max-w-md grid-cols-3 gap-3 border-t border-neutral-100 pt-4 sm:gap-4 dark:border-white/5">
                     <div class="rounded-box border border-neutral-200/70 bg-neutral-50/60 p-3 dark:border-white/10 dark:bg-white/5">
                         <span class="block text-[11px] font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Katering</span>
-                        <span class="mt-0.5 block font-mono text-xl font-semibold tracking-tight text-neutral-950 tabular-nums dark:text-white">{{ count($recommended) }}+</span>
+                        <span class="mt-0.5 block text-xl font-semibold tracking-tight text-neutral-950 tabular-nums dark:text-white">{{ count($recommended) }}+</span>
                     </div>
                     <div class="rounded-box border border-neutral-200/70 bg-neutral-50/60 p-3 dark:border-white/10 dark:bg-white/5">
                         <span class="block text-[11px] font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Menu Aktif</span>
-                        <span class="mt-0.5 block font-mono text-xl font-semibold tracking-tight text-neutral-950 tabular-nums dark:text-white">{{ count($popular) }}</span>
+                        <span class="mt-0.5 block text-xl font-semibold tracking-tight text-neutral-950 tabular-nums dark:text-white">{{ count($popular) }}</span>
                     </div>
                     <div class="rounded-box border border-neutral-200/70 bg-neutral-50/60 p-3 dark:border-white/10 dark:bg-white/5">
                         <span class="block text-[11px] font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Pesanan</span>
-                        <span class="mt-0.5 block font-mono text-xl font-semibold tracking-tight text-neutral-950 tabular-nums dark:text-white">{{ count($recentOrders) }}</span>
+                        <span class="mt-0.5 block text-xl font-semibold tracking-tight text-neutral-950 tabular-nums dark:text-white">{{ count($recentOrders) }}</span>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
         <section aria-labelledby="recommended-heading">
             <div class="flex items-end justify-between border-b border-neutral-200/70 pb-3 dark:border-white/10">
                 <div class="space-y-0.5">
-                    <span class="font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Pilihan kami</span>
+                    <span class="text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Pilihan kami</span>
                     <h2 id="recommended-heading" class="text-lg font-semibold tracking-tight text-neutral-950 sm:text-xl dark:text-white">Katering Terverifikasi</h2>
                 </div>
                 <a href="{{ route('customer.search') }}" class="group inline-flex items-center gap-1 text-xs font-medium text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white">
@@ -92,7 +92,7 @@
         {{-- ======= POPULAR MENUS ======= --}}
         <section aria-labelledby="popular-heading">
             <div class="border-b border-neutral-200/70 pb-3 dark:border-white/10">
-                <span class="font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Terlaris bulan ini</span>
+                <span class="text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Terlaris bulan ini</span>
                 <h2 id="popular-heading" class="text-lg font-semibold tracking-tight text-neutral-950 sm:text-xl dark:text-white">Menu Paling Dipesan</h2>
             </div>
 
@@ -112,7 +112,7 @@
         <section aria-labelledby="orders-heading">
             <div class="flex items-end justify-between border-b border-neutral-200/70 pb-3 dark:border-white/10">
                 <div class="space-y-0.5">
-                    <span class="font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Riwayat</span>
+                    <span class="text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Riwayat</span>
                     <h2 id="orders-heading" class="text-lg font-semibold tracking-tight text-neutral-950 sm:text-xl dark:text-white">Pesanan Terbaru</h2>
                 </div>
                 <a href="{{ route('customer.orders.index') }}" class="group inline-flex items-center gap-1 text-xs font-medium text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white">
@@ -131,13 +131,13 @@
                             </span>
                             <div>
                                 <span class="block text-xs font-medium text-neutral-950 sm:text-sm dark:text-white">{{ $order->merchant?->company_name ?? 'Katering' }}</span>
-                                <span class="mt-0.5 block font-mono text-[11px] text-neutral-500">
+                                <span class="mt-0.5 block text-[11px] text-neutral-500">
                                     #{{ $order->id }} · {{ $order->created_at->translatedFormat('d M Y, H:i') }}
                                 </span>
                             </div>
                         </div>
                         <div class="flex items-center justify-between gap-4 border-t border-neutral-100 pt-2 sm:justify-end sm:border-t-0 sm:pt-0 dark:border-white/5">
-                            <span class="font-mono text-xs font-semibold tabular-nums text-neutral-950 sm:text-sm dark:text-white">Rp {{ number_format($order->total_price, 0, ',', '.') }}</span>
+                            <span class="text-xs font-semibold tabular-nums text-neutral-950 sm:text-sm dark:text-white">Rp {{ number_format($order->total_price, 0, ',', '.') }}</span>
                             <span class="inline-flex items-center gap-1.5 rounded-full border border-amber-200/80 bg-amber-50 px-2.5 py-0.5 text-[11px] font-medium text-amber-800 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-300">
                                 <span class="size-1.5 rounded-full bg-amber-500"></span>
                                 {{ ucfirst($order->status) }}

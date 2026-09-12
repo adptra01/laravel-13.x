@@ -1,4 +1,4 @@
-<x-layouts.merchant title="Profil Merchant">
+<x-layouts.panel title="Profil Merchant">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Akun" title="Profil Merchant" description="Kelola informasi usaha katering Anda.">
             <x-slot:actions>
@@ -8,7 +8,23 @@
             </x-slot:actions>
         </x-page-header>
 
-        <div class="max-w-2xl rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-neutral-900">
+        @if ($merchant->verification_status === 'pending')
+            <x-ui.alerts variant="info" icon="ps:clock">
+                <x-ui.alerts.description>Profil sedang ditinjau admin — Anda tetap bisa memperbarui data usaha di bawah.</x-ui.alerts.description>
+            </x-ui.alerts>
+        @elseif ($merchant->verification_status === 'rejected')
+            <x-ui.alerts variant="error" icon="ps:warning-circle">
+                <x-ui.alerts.description>Verifikasi ditolak{{ $merchant->rejection_reason ? ': '.$merchant->rejection_reason : '' }}. Perbaiki data usaha di bawah, lalu ajukan ulang.</x-ui.alerts.description>
+            </x-ui.alerts>
+            <form method="POST" action="{{ route('merchant.profile.reapply') }}" class="-mt-3">
+                @csrf
+                <x-ui.button type="submit" size="sm" variant="outline" icon="ps:arrow-counter-clockwise">
+                    Ajukan Ulang Verifikasi
+                </x-ui.button>
+            </form>
+        @endif
+
+        <div class="rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <form method="POST" action="{{ route('merchant.profile.update') }}" enctype="multipart/form-data" class="space-y-5">
                 @csrf
                 @method('PUT')
@@ -69,4 +85,4 @@
             </form>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

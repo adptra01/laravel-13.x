@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-layouts.panel>
     <div class="mx-auto max-w-7xl space-y-6">
         <x-flash-messages />
 
@@ -43,4 +43,4 @@
             </form>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.panel>

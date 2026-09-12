@@ -1,8 +1,8 @@
-<x-layouts.merchant title="Pesanan Masuk">
+<x-layouts.panel title="Pesanan Masuk">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Penjualan" title="Pesanan Masuk" description="{{ $orders->total() }} pesanan total — konfirmasi dan kelola pesanan customer.">
             <x-slot:actions>
-                <span class="font-mono text-[11px] text-neutral-400">{{ $orders->total() }} data</span>
+                <span class="text-[11px] text-neutral-400">{{ $orders->total() }} data</span>
             </x-slot:actions>
         </x-page-header>
 
@@ -32,13 +32,13 @@
                 <tbody>
                     @forelse ($orders as $order)
                         <x-ui.table.row>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-500 dark:text-neutral-400">#{{ $order->id }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-500 dark:text-neutral-400">#{{ $order->id }}</x-ui.table.cell>
                             <x-ui.table.cell>
                                 <p class="font-medium text-neutral-900 dark:text-white">{{ $order->customer?->company_name ?? '-' }}</p>
                                 <p class="text-xs text-neutral-500">{{ $order->customer?->user?->email }}</p>
                             </x-ui.table.cell>
                             <x-ui.table.cell class="whitespace-nowrap text-neutral-600 dark:text-neutral-400">{{ $order->delivery_date->format('d M Y') }}</x-ui.table.cell>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($order->total_price, 0, ',', '.') }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($order->total_price, 0, ',', '.') }}</x-ui.table.cell>
                             <x-ui.table.cell>
                                 <x-ui.badge color="{{ match ($order->status) {
                                     'pending' => 'amber',
@@ -75,4 +75,4 @@
             </x-ui.table>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

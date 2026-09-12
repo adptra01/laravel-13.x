@@ -1,4 +1,4 @@
-<x-layouts.merchant title="Detail Invoice">
+<x-layouts.panel title="Detail Invoice">
     <div class="mx-auto max-w-7xl space-y-6">
         <x-page-header eyebrow="Penagihan" title="Invoice {{ $invoice->invoice_number }}" description="Terbit {{ $invoice->issued_at->format('d M Y') }} · Jatuh tempo {{ $invoice->due_date->format('d M Y') }}.">
             <x-slot:actions>
@@ -51,27 +51,27 @@
                     @foreach ($invoice->order?->items ?? [] as $item)
                         <x-ui.table.row>
                             <x-ui.table.cell class="font-medium text-neutral-900 dark:text-white">{{ $item->menu?->name ?? '-' }}</x-ui.table.cell>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">{{ $item->quantity }}</x-ui.table.cell>
-                            <x-ui.table.cell class="font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($item->price, 0, ',', '.') }}</x-ui.table.cell>
-                            <x-ui.table.cell class="text-right font-mono text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-600 tabular-nums dark:text-neutral-400">{{ $item->quantity }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($item->price, 0, ',', '.') }}</x-ui.table.cell>
+                            <x-ui.table.cell class="text-right text-xs text-neutral-600 tabular-nums dark:text-neutral-400">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</x-ui.table.cell>
                         </x-ui.table.row>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr class="border-t border-neutral-200/70 dark:border-white/10">
                         <td colspan="3" class="px-5 py-3 text-right text-sm text-neutral-600 dark:text-neutral-400">Subtotal</td>
-                        <td class="px-5 py-3 text-right font-mono text-xs tabular-nums text-neutral-600 dark:text-neutral-400">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</td>
+                        <td class="px-5 py-3 text-right text-xs tabular-nums text-neutral-600 dark:text-neutral-400">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</td>
                     </tr>
                     <tr>
                         <td colspan="3" class="px-5 py-3 text-right text-sm text-neutral-600 dark:text-neutral-400">PPN (11%)</td>
-                        <td class="px-5 py-3 text-right font-mono text-xs tabular-nums text-neutral-600 dark:text-neutral-400">Rp {{ number_format($invoice->tax, 0, ',', '.') }}</td>
+                        <td class="px-5 py-3 text-right text-xs tabular-nums text-neutral-600 dark:text-neutral-400">Rp {{ number_format($invoice->tax, 0, ',', '.') }}</td>
                     </tr>
                     <tr class="border-t border-neutral-200/70 dark:border-white/10">
                         <td colspan="3" class="px-5 py-3 text-right text-sm font-semibold text-neutral-700 dark:text-neutral-300">Total</td>
-                        <td class="px-5 py-3 text-right font-mono text-sm font-semibold tabular-nums text-neutral-900 dark:text-white">Rp {{ number_format($invoice->total, 0, ',', '.') }}</td>
+                        <td class="px-5 py-3 text-right text-sm font-semibold tabular-nums text-neutral-900 dark:text-white">Rp {{ number_format($invoice->total, 0, ',', '.') }}</td>
                     </tr>
                 </tfoot>
             </x-ui.table>
         </div>
     </div>
-</x-layouts.merchant>
+</x-layouts.panel>

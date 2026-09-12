@@ -8,7 +8,7 @@
 <div {{ $attributes->class('flex flex-col gap-4 pb-5 sm:flex-row sm:items-end sm:justify-between') }}>
     <div class="min-w-0">
         @if ($eyebrow)
-            <p class="font-mono text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># {{ $eyebrow }}</p>
+            <p class="text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># {{ $eyebrow }}</p>
         @endif
         @if ($title)
             <h1 class="mt-1.5 text-xl font-semibold tracking-tight text-neutral-900 sm:text-2xl dark:text-white">{{ $title }}</h1>

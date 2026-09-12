@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-layouts.panel>
     <div class="mx-auto max-w-7xl space-y-6">
         <x-flash-messages />
 
@@ -21,12 +21,12 @@
                         Cari
                     </x-ui.button>
                 </form>
-                <span class="font-mono text-[11px] text-neutral-400">{{ $users->total() }} data</span>
+                <span class="text-[11px] text-neutral-400">{{ $users->total() }} data</span>
             </div>
 
             <x-ui.table :paginator="$users">
                 <x-ui.table.header>
-                    <x-ui.table.head>
+                    <x-ui.table.head @if ($sort === 'name') aria-sort="{{ $direction === 'asc' ? 'ascending' : 'descending' }}" @endif>
                         <a href="{{ route('users.index', ['sort' => 'name', 'direction' => $sort === 'name' && $direction === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}"
                             class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white">
                             Pengguna
@@ -35,7 +35,7 @@
                             @endif
                         </a>
                     </x-ui.table.head>
-                    <x-ui.table.head>
+                    <x-ui.table.head @if ($sort === 'email') aria-sort="{{ $direction === 'asc' ? 'ascending' : 'descending' }}" @endif>
                         <a href="{{ route('users.index', ['sort' => 'email', 'direction' => $sort === 'email' && $direction === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}"
                             class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white">
                             Email
@@ -44,7 +44,7 @@
                             @endif
                         </a>
                     </x-ui.table.head>
-                    <x-ui.table.head>
+                    <x-ui.table.head @if ($sort === 'created_at') aria-sort="{{ $direction === 'asc' ? 'ascending' : 'descending' }}" @endif>
                         <a href="{{ route('users.index', ['sort' => 'created_at', 'direction' => $sort === 'created_at' && $direction === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}"
                             class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white">
                             Bergabung
@@ -60,7 +60,7 @@
                         <x-ui.table.row>
                             <x-ui.table.cell>
                                 <div class="flex items-center gap-3">
-                                    <x-ui.avatar size="sm" src="https://api.dicebear.com/10.x/lorelei/svg?seed={{ $user->name }}" circle alt="{{ $user->name }}" />
+                                    <x-ui.avatar size="sm" :name="$user->name" circle :alt="$user->name" />
                                     <div class="min-w-0">
                                         <p class="truncate font-medium text-neutral-900 dark:text-white">{{ $user->name }}</p>
                                         @if ($user->id === auth()->id())
@@ -93,7 +93,7 @@
                             <x-ui.empty>
                                 <x-ui.icon name="ps:users" class="size-8 text-neutral-300 dark:text-neutral-600" />
                                 <p class="mt-2 text-sm font-medium text-neutral-700 dark:text-neutral-300">Tidak ada pengguna ditemukan</p>
-                                <p class="text-xs text-neutral-500">Buat pengguna baru untuk memulai.</p>
+                                <p class="text-xs text-neutral-500 dark:text-neutral-400">Buat pengguna baru untuk memulai.</p>
                             </x-ui.empty>
                         </x-ui.table.empty>
                     @endforelse
@@ -101,4 +101,4 @@
             </x-ui.table>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.panel>

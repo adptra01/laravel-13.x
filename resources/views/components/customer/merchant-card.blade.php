@@ -7,14 +7,14 @@
     $menus = (int) ($merchant->menus_count ?? $merchant->menus->count());
 @endphp
 
-<article class="group flex flex-col justify-between rounded-box border border-neutral-200/70 bg-white p-5 shadow-sm transition-colors hover:border-neutral-300 dark:border-white/10 dark:bg-neutral-900 dark:hover:border-white/20">
+<article class="group flex flex-col justify-between rounded-box border border-neutral-200/70 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300 dark:border-white/10 dark:bg-neutral-900 dark:hover:border-white/20">
     <div class="space-y-3">
         <div class="flex items-center gap-3">
             @if ($logo)
                 <img src="{{ $logo }}" alt="Logo {{ $merchant->company_name }}"
                     class="size-10 shrink-0 rounded-md border border-neutral-200 bg-white object-contain dark:border-white/10" loading="lazy" />
             @else
-                <div class="grid size-10 shrink-0 place-items-center rounded-md border border-neutral-200 bg-neutral-100 font-mono text-sm font-semibold text-neutral-700 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200">
+                <div class="grid size-10 shrink-0 place-items-center rounded-md border border-neutral-200 bg-neutral-100 text-sm font-semibold text-neutral-700 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200">
                     {{ str($merchant->company_name)->substr(0, 1)->upper() }}
                 </div>
             @endif
@@ -36,7 +36,7 @@
     </div>
 
     <div class="mt-3 flex items-center justify-between border-t border-neutral-100 pt-3.5 text-xs text-neutral-500 dark:border-white/5">
-        <div class="flex items-center gap-3 font-mono text-[11px]">
+        <div class="flex items-center gap-3 text-[11px]">
             <span class="inline-flex items-center gap-1">
                 <x-ui.icon name="ps:fork-knife" class="size-3.5 text-neutral-400" />
                 {{ $menus }} menu
