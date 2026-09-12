@@ -45,7 +45,7 @@
                             <x-ui.table.cell>
                                 <div class="flex items-center gap-3">
                                     @if ($menu->image)
-                                        <img src="{{ asset('storage/'.$menu->image) }}" alt="{{ $menu->name }}" class="size-10 rounded-md border border-neutral-200/70 bg-white object-contain dark:border-white/10" />
+                                        <img src="{{ Storage::url($menu->image) }}" alt="{{ $menu->name }}" class="size-10 rounded-md border border-neutral-200/70 bg-white object-contain dark:border-white/10" />
                                     @else
                                         <div class="grid size-10 shrink-0 place-items-center rounded-md border border-neutral-200/70 bg-neutral-100 text-neutral-400 dark:border-white/10 dark:bg-white/5 dark:text-neutral-500">
                                             <x-ui.icon name="ps:image" class="size-5" />

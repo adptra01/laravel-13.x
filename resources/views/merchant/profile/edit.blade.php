@@ -71,7 +71,7 @@
                     <x-ui.label for="logo">Logo</x-ui.label>
                     @if ($merchant->logo)
                         <div class="mb-3 mt-1">
-                            <img src="{{ asset('storage/'.$merchant->logo) }}" alt="Logo {{ $merchant->company_name }}" class="size-20 rounded-md border border-neutral-200/70 bg-white object-contain dark:border-white/10" />
+                            <img src="{{ Storage::url($merchant->logo) }}" alt="Logo {{ $merchant->company_name }}" class="size-20 rounded-md border border-neutral-200/70 bg-white object-contain dark:border-white/10" />
                         </div>
                     @endif
                     <input type="file" id="logo" name="logo" accept="image/*"

@@ -6,7 +6,7 @@
         {{-- Header --}}
         <header class="flex items-center gap-4 rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 p-6 shadow-sm">
             @if ($customer->logo)
-                <img src="{{ asset('storage/'.$customer->logo) }}" alt="Logo {{ $customer->company_name }}" class="size-16 rounded-lg border border-neutral-200 bg-white dark:bg-neutral-900 dark:border-white/10 object-contain" />
+                <img src="{{ Storage::url($customer->logo) }}" alt="Logo {{ $customer->company_name }}" class="size-16 rounded-lg border border-neutral-200 bg-white dark:bg-neutral-900 dark:border-white/10 object-contain" />
             @else
                 <span class="grid size-16 shrink-0 place-items-center rounded-lg border border-neutral-200 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5 text-neutral-500 dark:text-neutral-400">
                     <x-ui.icon name="ps:buildings" class="size-8" />
@@ -55,7 +55,7 @@
                     <x-ui.label for="logo" class="mb-1.5">Logo <span class="font-normal text-neutral-400">(opsional)</span></x-ui.label>
                     @if ($customer->logo)
                         <div class="mb-3 mt-2">
-                            <img src="{{ asset('storage/'.$customer->logo) }}" alt="Logo {{ $customer->company_name }}" class="size-20 rounded-lg border border-neutral-200 bg-white dark:bg-neutral-900 dark:border-white/10 object-contain" />
+                            <img src="{{ Storage::url($customer->logo) }}" alt="Logo {{ $customer->company_name }}" class="size-20 rounded-lg border border-neutral-200 bg-white dark:bg-neutral-900 dark:border-white/10 object-contain" />
                         </div>
                     @endif
                     <input type="file" id="logo" name="logo" accept="image/*"

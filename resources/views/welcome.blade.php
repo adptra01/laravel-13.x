@@ -234,7 +234,7 @@
                         <div class="animate-rise rounded-lg border border-zinc-200 bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700" style="--index:{{ $loop->index }}">
                             <div class="flex items-start gap-3.5">
                                 @if ($merchant->logo)
-                                    <img src="{{ asset('storage/'.$merchant->logo) }}" alt="Logo {{ $merchant->company_name }}"
+                                    <img src="{{ Storage::url($merchant->logo) }}" alt="Logo {{ $merchant->company_name }}"
                                         class="flex size-10 shrink-0 items-center justify-center rounded-md border border-zinc-200 bg-white object-contain dark:border-zinc-700 dark:bg-zinc-800" loading="lazy" />
                                 @else
                                     <div class="flex size-10 shrink-0 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 text-sm font-semibold text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">

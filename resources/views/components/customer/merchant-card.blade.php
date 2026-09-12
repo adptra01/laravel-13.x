@@ -1,7 +1,7 @@
 @props(['merchant'])
 
 @php
-    $logo = $merchant->logo ? asset('storage/'.$merchant->logo) : null;
+    $logo = $merchant->logo ? Storage::url($merchant->logo) : null;
     $avg = (float) ($merchant->avg_rating ?? 0);
     $reviews = (int) ($merchant->total_reviews ?? 0);
     $menus = (int) ($merchant->menus_count ?? $merchant->menus->count());

@@ -19,7 +19,7 @@
 
             <div class="p-6">
                 {{-- Order summary card --}}
-                <div class="flex items-center gap-4 rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5 p-4">
+                <div class="flex items-center gap-4 rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white/5 p-4">
                     <div class="grid size-16 shrink-0 place-items-center rounded-lg bg-zinc-950 text-white">
                         <x-ui.icon name="ps:shopping-bag" class="size-7 !text-white" />
                     </div>
@@ -61,7 +61,7 @@
                     </div>
 
                     {{-- Summary --}}
-                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5 p-4 text-sm">
+                    <div class="rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white/5 p-4 text-sm">
                         <div class="flex items-center justify-between text-neutral-600 dark:text-neutral-400">
                             <span>Subtotal</span>
                             <span class="multiply-price text-lg font-semibold tabular-nums text-neutral-900 dark:text-white" data-price="{{ $menu->price }}">Rp {{ number_format($menu->price, 0, ',', '.') }}</span>
@@ -81,7 +81,7 @@
                 </form>
                 @else
                     <div class="mt-6">
-                        <x-ui.empty class="rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5 p-10">
+                        <x-ui.empty class="rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white/5 p-10">
                             <x-ui.icon name="ps:package" class="size-10 text-neutral-300 dark:text-neutral-600" />
                             <p class="mt-3 text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">Stok menu ini sedang habis</p>
                             <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Cek kembali nanti atau lihat menu lain dari katering ini.</p>

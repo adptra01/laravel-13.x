@@ -43,7 +43,7 @@
                     <x-ui.label for="image">Foto Menu</x-ui.label>
                     @if ($menu->image)
                         <div class="mb-3 mt-1">
-                            <img src="{{ asset('storage/'.$menu->image) }}" alt="{{ $menu->name }}" class="size-20 rounded-md border border-neutral-200/70 bg-white object-contain dark:border-white/10" />
+                            <img src="{{ Storage::url($menu->image) }}" alt="{{ $menu->name }}" class="size-20 rounded-md border border-neutral-200/70 bg-white object-contain dark:border-white/10" />
                         </div>
                     @endif
                     <input type="file" id="image" name="image" accept="image/*"

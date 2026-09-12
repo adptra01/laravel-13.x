@@ -72,7 +72,7 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                        <tr class="border-t border-neutral-100 dark:border-white/5 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5">
+                        <tr class="border-t border-neutral-100 dark:border-white/5 bg-neutral-50 dark:bg-white/5">
                             <td colspan="3" class="px-6 py-4 text-right text-sm font-semibold text-neutral-700 dark:text-neutral-300">Total</td>
                             <td class="px-6 py-4 text-right text-base font-semibold tabular-nums text-neutral-900 dark:text-white">Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
                         </tr>
@@ -100,7 +100,7 @@
             </h2>
             <ul class="mt-3 space-y-2">
                 @forelse ($order->invoices as $invoice)
-                    <li class="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5 px-4 py-3">
+                    <li class="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white/5 px-4 py-3">
                         <a href="{{ route('customer.invoices.show', $invoice) }}" class="text-xs font-semibold text-neutral-900 dark:text-white underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-400 dark:hover:text-neutral-300">{{ $invoice->invoice_number }}</a>
                         <span class="text-sm tabular-nums text-neutral-700 dark:text-neutral-300">Rp {{ number_format($invoice->total, 0, ',', '.') }}</span>
                     </li>

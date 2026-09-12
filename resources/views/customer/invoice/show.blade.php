@@ -63,7 +63,7 @@
                             </x-ui.table.row>
                         @endforeach
                     </tbody>
-                    <tfoot class="bg-neutral-50 dark:bg-white dark:bg-neutral-900/5/60 dark:bg-neutral-900/5">
+                    <tfoot class="bg-neutral-50 dark:bg-white/5">
                         <tr class="border-t border-neutral-100 dark:border-white/5">
                             <td colspan="3" class="px-5 py-3 text-right text-sm text-neutral-600 dark:text-neutral-400">Subtotal</td>
                             <td class="px-5 py-3 text-right text-sm tabular-nums text-neutral-700 dark:text-neutral-300">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</td>

@@ -1,7 +1,7 @@
 @props(['menu'])
 
 @php
-    $image = $menu->image ? asset('storage/'.$menu->image) : null;
+    $image = $menu->image ? Storage::url($menu->image) : null;
 @endphp
 
 <article class="group flex flex-col overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300 dark:border-white/10 dark:bg-neutral-900 dark:hover:border-white/20">

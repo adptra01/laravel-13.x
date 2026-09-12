@@ -42,7 +42,7 @@
                 <div class="relative rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 p-5 shadow-sm transition-colors hover:border-neutral-300">
                     <a href="{{ route('customer.orders.show', $order) }}" class="absolute inset-0 rounded-box" aria-label="Lihat detail pesanan #{{ $order->id }}"></a>
                     <div class="relative z-10 flex flex-wrap items-center gap-3">
-                        <span class="pointer-events-none grid size-11 shrink-0 place-items-center rounded-lg border border-neutral-200 bg-neutral-50 dark:bg-white dark:bg-neutral-900/5 text-neutral-500 dark:text-neutral-400">
+                        <span class="pointer-events-none grid size-11 shrink-0 place-items-center rounded-lg border border-neutral-200 bg-neutral-50 dark:bg-white/5 text-neutral-500 dark:text-neutral-400">
                             <x-ui.icon name="ps:shopping-cart" class="size-5" />
                         </span>
                         <div class="pointer-events-none min-w-0 flex-1">
