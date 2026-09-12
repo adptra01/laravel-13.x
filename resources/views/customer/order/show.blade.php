@@ -108,17 +108,46 @@
                     <li class="text-sm text-neutral-500 dark:text-neutral-400">Belum ada invoice tambahan. Invoice utama terbit otomatis saat pesanan dibuat.</li>
                 @endforelse
             </ul>
+
+            <div class="mt-5 border-t border-neutral-100 pt-4 dark:border-white/5">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Bukti Pembayaran</h3>
+                @forelse ($order->payments as $payment)
+                    <div class="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-neutral-200/70 bg-neutral-50 dark:bg-white/5 px-4 py-3">
+                        <div class="min-w-0">
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                {{ $payment->created_at->translatedFormat('d M Y, H:i') }} · Rp {{ number_format($payment->amount, 0, ',', '.') }}
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            @if ($payment->proof_path)
+                                <a href="{{ Storage::url($payment->proof_path) }}" target="_blank" rel="noopener"
+                                    class="inline-flex items-center gap-1 text-xs font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-white dark:decoration-white/20">
+                                    <x-ui.icon name="ps:file-text" class="size-3.5" /> Lihat bukti
+                                </a>
+                            @endif
+                            <x-ui.badge color="{{ $payment->status === 'success' ? null : ($payment->status === 'pending' ? 'amber' : 'red') }}" variant="outline">
+                                {{ match ($payment->status) {
+                                    'success' => 'Terverifikasi',
+                                    'pending' => 'Menunggu Konfirmasi',
+                                    'failed' => 'Gagal',
+                                    default => ucfirst($payment->status),
+                                } }}
+                            </x-ui.badge>
+                        </div>
+                    </div>
+                @empty
+                    <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">Belum ada pembayaran. Klik "Bayar Sekarang" untuk mengunggah bukti transfer.</p>
+                @endforelse
+            </div>
         </section>
 
         {{-- Actions --}}
         <div class="flex flex-wrap items-center justify-end gap-3">
             @if ($order->payment_status !== 'paid' && ! in_array($order->status, ['cancelled', 'completed']))
-                <form method="POST" action="{{ route('customer.orders.pay', $order) }}">
-                    @csrf
-                    <x-ui.button type="submit" color="primary" icon="ps:credit-card">
-                        Bayar Sekarang
-                    </x-ui.button>
-                </form>
+                <x-ui.button color="primary" icon="ps:credit-card"
+                    x-on:click="$dispatch('open-modal', { id: 'bayar-{{ $order->id }}' })">
+                    Bayar Sekarang
+                </x-ui.button>
             @endif
 
             @if ($order->status === 'pending')
@@ -136,5 +165,9 @@
                 </x-ui.button>
             @endif
         </div>
+
+        @if ($order->payment_status !== 'paid' && ! in_array($order->status, ['cancelled', 'completed']))
+            @include('customer.partials.proof-upload-modal')
+        @endif
     </div>
 </x-layouts.marketplace>

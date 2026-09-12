@@ -29,12 +29,15 @@ class ProfileController extends Controller
             'bank_name' => ['nullable', 'string', 'max:100'],
             'bank_account' => ['nullable', 'string', 'max:50'],
             'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'banner' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
         ]);
 
         if ($request->hasFile('logo')) {
-            $path = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $request->file('logo')->store('logos', 'public');
+        }
 
-            $validated['logo'] = $path;
+        if ($request->hasFile('banner')) {
+            $validated['banner'] = $request->file('banner')->store('banners', 'public');
         }
 
         $merchant->update($validated);

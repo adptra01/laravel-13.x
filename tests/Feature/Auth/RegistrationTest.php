@@ -31,7 +31,7 @@ class RegistrationTest extends TestCase
             'role' => 'customer',
             'name' => 'Test User',
             'company_name' => 'PT Contoh Kantor',
-            'email' => 'test@example.com',
+            'email' => 'test@testing.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
@@ -46,7 +46,7 @@ class RegistrationTest extends TestCase
             'role' => 'merchant',
             'name' => 'Budi Uji',
             'company_name' => 'Katering Uji Jaya',
-            'email' => 'merchant-uji@example.com',
+            'email' => 'merchant-uji@testing.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
@@ -54,7 +54,7 @@ class RegistrationTest extends TestCase
         $this->assertAuthenticated();
         $response->assertRedirect(route('merchant.dashboard', absolute: false));
 
-        $user = User::where('email', 'merchant-uji@example.com')->first();
+        $user = User::where('email', 'merchant-uji@testing.com')->first();
         $this->assertSame('merchant', $user->role);
         $this->assertTrue(Merchant::where('user_id', $user->id)->exists());
     }
@@ -65,7 +65,7 @@ class RegistrationTest extends TestCase
             'role' => 'admin',
             'name' => 'Test Admin',
             'company_name' => 'PT Admin',
-            'email' => 'admin-uji@example.com',
+            'email' => 'admin-uji@testing.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);

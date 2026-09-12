@@ -107,7 +107,11 @@ class OrderController extends Controller
         return view('customer.order.show', compact('order'));
     }
 
-    public function pay(Order $order): RedirectResponse
+    /**
+     * Customer mengunggah bukti pembayaran. Payment tersimpan dengan status
+     * pending sampai merchant mengonfirmasi.
+     */
+    public function pay(Request $request, Order $order): RedirectResponse
     {
         abort_unless($order->customer_id === Auth::user()->customerProfile->id, 403);
 
@@ -121,17 +125,23 @@ class OrderController extends Controller
                 ->with('error', 'Pesanan dalam status ini tidak dapat dibayar.');
         }
 
+        $validated = $request->validate([
+            'proof' => ['required', 'file', 'mimes:jpeg,png,jpg,webp,pdf', 'max:4096'],
+        ]);
+
         $payment = $order->payments()->latest()->first();
 
         if (! $payment) {
             $payment = $this->payments->createPayment($order);
         }
 
-        // Simulasi sandbox: langsung sukses.
-        $this->payments->markAsSuccess($payment);
+        $payment->update([
+            'proof_path' => $request->file('proof')->store('payment-proofs', 'public'),
+            'status' => 'pending',
+        ]);
 
         return redirect()->route('customer.orders.show', $order)
-            ->with('saved', 'Pembayaran berhasil (mode sandbox).');
+            ->with('saved', 'Bukti pembayaran terkirim. Menunggu konfirmasi merchant.');
     }
 
     public function cancel(Order $order): RedirectResponse

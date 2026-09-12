@@ -76,11 +76,28 @@
                 <div class="border-b border-neutral-100 px-5 py-3.5 dark:border-white/5">
                     <h2 class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">Pembayaran</h2>
                 </div>
-                <div class="space-y-2 px-5 py-4">
+                <div class="space-y-3 px-5 py-4">
                     @forelse ($order->payments as $payment)
-                        <div class="flex items-center justify-between gap-3 text-sm">
-                            <span class="text-xs text-neutral-500">{{ $payment->transaction_id }}</span>
-                            <x-ui.badge variant="outline" color="{{ $payment->status === 'pending' ? 'amber' : ($payment->status === 'success' ? null : 'red') }}">{{ $payment->status === 'success' ? 'Berhasil' : ($payment->status === 'pending' ? 'Menunggu' : 'Gagal') }}</x-ui.badge>
+                        <div class="flex flex-wrap items-center justify-between gap-3">
+                            <div class="min-w-0">
+                                <p class="text-xs text-neutral-500">{{ $payment->created_at->translatedFormat('d M Y, H:i') }} · Rp {{ number_format($payment->amount, 0, ',', '.') }}</p>
+                                @if ($payment->proof_path)
+                                    <a href="{{ Storage::url($payment->proof_path) }}" target="_blank" rel="noopener"
+                                        class="mt-1 inline-flex items-center gap-1 text-xs font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-white dark:decoration-white/20">
+                                        <x-ui.icon name="ps:file-text" class="size-3.5" /> Lihat bukti
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <x-ui.badge variant="outline" color="{{ $payment->status === 'pending' ? 'amber' : ($payment->status === 'success' ? null : 'red') }}">{{ $payment->status === 'success' ? 'Terverifikasi' : ($payment->status === 'pending' ? 'Menunggu Konfirmasi' : 'Gagal') }}</x-ui.badge>
+                                @if ($payment->status === 'pending' && $payment->proof_path)
+                                    <form method="POST" action="{{ route('merchant.payments.confirm', [$order, $payment]) }}"
+                                        onsubmit="return confirm('Konfirmasi bukti pembayaran pesanan #{{ $order->id }} sebagai lunas?')">
+                                        @csrf
+                                        <x-ui.button type="submit" size="sm" icon="ps:check">Konfirmasi</x-ui.button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     @empty
                         <p class="text-sm text-neutral-500">Belum ada pembayaran.</p>

@@ -79,6 +79,18 @@
                     <x-ui.error :messages="$errors->get('logo')" />
                 </x-ui.field>
 
+                <x-ui.field>
+                    <x-ui.label for="banner">Banner Profil (tampil di halaman katering — JPG/PNG/WebP, maks 4MB)</x-ui.label>
+                    @if ($merchant->banner)
+                        <div class="mb-2 mt-1">
+                            <img src="{{ Storage::url($merchant->banner) }}" alt="Banner {{ $merchant->company_name }}" class="h-24 w-full rounded-md border border-neutral-200/70 object-cover dark:border-white/10" />
+                        </div>
+                    @endif
+                    <input type="file" id="banner" name="banner" accept="image/*"
+                        class="mt-1 block w-full text-sm text-neutral-600 file:mr-4 file:rounded-md file:border-0 file:bg-neutral-900 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white dark:text-neutral-400 dark:file:bg-white dark:file:text-neutral-900" />
+                    <x-ui.error :messages="$errors->get('banner')" />
+                </x-ui.field>
+
                 <div class="flex items-center justify-end gap-2 border-t border-neutral-100 pt-5 dark:border-white/5">
                     <x-ui.button type="submit" icon="ps:check">Simpan Perubahan</x-ui.button>
                 </div>

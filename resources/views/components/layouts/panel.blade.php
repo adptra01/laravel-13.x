@@ -8,7 +8,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ?? setting('site_title', site_name()) }}</title>
+    @if (setting('favicon'))
+        <link rel="icon" type="image/png" href="{{ Storage::url(setting('favicon')) }}">
+    @endif
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
     @include('components.fonts')

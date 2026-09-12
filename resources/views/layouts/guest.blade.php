@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ site_name() }}</title>
         <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
         <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 
@@ -21,11 +21,11 @@
             <div class="relative hidden overflow-hidden bg-neutral-950 lg:flex lg:flex-col lg:justify-between lg:p-10 dark:border-r dark:border-white/10">
                 <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:28px_28px]" aria-hidden="true"></div>
 
-                <a href="/" class="relative flex items-center gap-2.5" aria-label="Beranda {{ config('app.name') }}">
+                <a href="/" class="relative flex items-center gap-2.5" aria-label="Beranda {{ site_name() }}">
                     <span class="grid size-9 place-items-center rounded-md bg-white dark:bg-neutral-900 text-neutral-950">
-                        <x-ui.icon name="ps:fork-knife" class="size-4.5" />
+                        <x-ui.icon name="ps:fork-knife" class="size-4.5 !text-neutral-950" />
                     </span>
-                    <span class="text-lg font-semibold tracking-tight text-white">{{ config('app.name', 'Laravel') }}</span>
+                    <span class="text-lg font-semibold tracking-tight text-white">{{ site_name() }}</span>
                    
                 </a>
 
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
 
-                <p class="relative text-xs text-neutral-500 dark:text-neutral-400">&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}</p>
+                <p class="relative text-xs text-neutral-500 dark:text-neutral-400">&copy; {{ date('Y') }} {{ site_name() }}</p>
             </div>
 
             {{-- Panel form --}}
@@ -63,9 +63,9 @@
                 <div class="w-full max-w-md">
                     <a href="/" class="mb-8 inline-flex items-center gap-2 lg:hidden">
                         <span class="grid size-9 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                            <x-ui.icon name="ps:fork-knife" class="size-4.5" />
+                            <x-ui.icon name="ps:fork-knife" class="size-4.5 !text-neutral-950" />
                         </span>
-                        <span class="text-lg font-semibold tracking-tight text-neutral-900 dark:text-white">{{ config('app.name', 'Laravel') }}</span>
+                        <span class="text-lg font-semibold tracking-tight text-neutral-900 dark:text-white">{{ site_name() }}</span>
                     </a>
 
                     <div class="animate-rise rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm sm:p-8 dark:border-white/10 dark:bg-neutral-900">

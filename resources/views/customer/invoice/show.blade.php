@@ -84,13 +84,35 @@
         {{-- Payment CTA: bayar langsung dari invoice, 1 klik --}}
         @if ($invoice->status !== 'paid' && $invoice->order?->status !== 'cancelled')
             <div class="flex flex-col items-end gap-1.5">
-                <form method="POST" action="{{ route('customer.orders.pay', $invoice->order) }}">
-                    @csrf
-                    <x-ui.button type="submit" color="primary" icon="ps:credit-card">
-                        Bayar Sekarang
-                    </x-ui.button>
-                </form>
+                <x-ui.button color="primary" icon="ps:credit-card"
+                    x-on:click="$dispatch('open-modal', { id: 'bayar-{{ $invoice->id }}' })">
+                    Bayar Sekarang
+                </x-ui.button>
                 <p class="text-xs text-neutral-400">Invoice ini terbit otomatis saat pesanan dibuat.</p>
+            </div>
+
+            @include('customer.partials.proof-upload-modal')
+        @endif
+
+        @if ($invoice->order?->payments->whereNotNull('proof_path')->isNotEmpty())
+            <div class="rounded-box border border-neutral-200/70 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-neutral-900">
+                <h2 class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">Bukti Pembayaran</h2>
+                <div class="mt-3 flex flex-wrap gap-3">
+                    @foreach ($invoice->order->payments->whereNotNull('proof_path') as $payment)
+                        <a href="{{ Storage::url($payment->proof_path) }}" target="_blank" rel="noopener"
+                            class="group flex items-center gap-3 rounded-lg border border-neutral-200/70 bg-neutral-50 dark:border-white/10 dark:bg-white/5 px-4 py-3 transition-colors hover:border-neutral-300 dark:hover:border-white/20">
+                            @if (str_ends_with($payment->proof_path, '.pdf'))
+                                <x-ui.icon name="ps:file-pdf" class="size-8 text-neutral-400" />
+                            @else
+                                <img src="{{ Storage::url($payment->proof_path) }}" alt="Bukti pembayaran" class="size-12 rounded-md border border-neutral-200/70 object-cover dark:border-white/10" />
+                            @endif
+                            <div>
+                                <p class="text-xs font-medium text-neutral-900 dark:text-white">Bukti transfer · {{ $payment->created_at->translatedFormat('d M Y') }}</p>
+                                <p class="text-[11px] text-neutral-500">{{ $payment->status === 'success' ? 'Terverifikasi' : 'Menunggu konfirmasi merchant' }}</p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
         @endif
 

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'address',
     'phone',
     'logo',
+    'banner',
     'bank_name',
     'bank_account',
     'verification_status',

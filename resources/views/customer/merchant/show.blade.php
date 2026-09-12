@@ -6,7 +6,13 @@
         <section
             class="overflow-hidden rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 shadow-sm"
             aria-label="Profil katering">
-            <div class="relative h-32 bg-neutral-200/70 sm:h-44 dark:bg-white/5" aria-hidden="true">
+            <div class="relative h-32 sm:h-44" aria-hidden="true">
+                @if ($merchant->banner)
+                    <img src="{{ Storage::url($merchant->banner) }}" alt="Banner {{ $merchant->company_name }}"
+                        class="absolute inset-0 size-full object-cover" />
+                @else
+                    <div class="absolute inset-0 bg-neutral-200/70 dark:bg-white/5"></div>
+                @endif
                 <div
                     class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#71717a18_1px,transparent_1px),linear-gradient(to_bottom,#71717a18_1px,transparent_1px)] bg-[size:24px_24px]">
                 </div>

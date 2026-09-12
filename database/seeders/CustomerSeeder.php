@@ -17,7 +17,7 @@ class CustomerSeeder extends Seeder
     {
         $user = User::create([
             'name' => 'Rina Kusuma',
-            'email' => 'customer@example.com',
+            'email' => 'customer@testing.com',
             'password' => Hash::make('password'),
             'role' => 'customer',
             'email_verified_at' => now(),
@@ -32,6 +32,6 @@ class CustomerSeeder extends Seeder
             'phone' => '081234567890',
         ]);
 
-        $this->command->info('Customer: customer@example.com / password');
+        $this->command->info('Customer: customer@testing.com / password');
     }
 }

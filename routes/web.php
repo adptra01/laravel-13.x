@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\MerchantController as AdminMerchantController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Customer\DashboardController as CustomerDashboardController;
 use App\Http\Controllers\Customer\InvoiceController as CustomerInvoiceController;
 use App\Http\Controllers\Customer\MerchantController as CustomerMerchantController;
@@ -74,6 +75,7 @@ Route::prefix('merchant')->name('merchant.')->middleware(['auth', 'verified', 'r
     Route::get('orders', [MerchantOrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}', [MerchantOrderController::class, 'show'])->name('orders.show');
     Route::patch('orders/{order}/status', [MerchantOrderController::class, 'updateStatus'])->name('orders.status');
+    Route::post('orders/{order}/payments/{payment}/confirm', [MerchantOrderController::class, 'confirmPayment'])->name('payments.confirm');
 
     Route::get('invoices', [MerchantInvoiceController::class, 'index'])->name('invoices.index');
     Route::get('invoices/{invoice}', [MerchantInvoiceController::class, 'show'])->name('invoices.show');
@@ -111,6 +113,9 @@ Route::prefix('customer')->name('customer.')->middleware(['auth', 'verified', 'r
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role.admin'])->group(function () {
     Route::get('/', AdminDashboardController::class)->name('dashboard');
+
+    Route::get('settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [AdminSettingController::class, 'update'])->name('settings.update');
 
     Route::get('merchants', [AdminMerchantController::class, 'index'])->name('merchants.index');
     Route::post('merchants/{merchant}/approve', [AdminMerchantController::class, 'approve'])->name('merchants.approve');

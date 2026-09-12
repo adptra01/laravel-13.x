@@ -1,6 +1,6 @@
 <x-layouts.panel>
     <div class="mx-auto max-w-7xl space-y-6">
-        <x-page-header eyebrow="Ringkasan" title="Dashboard Admin" description="Kesehatan platform {{ config('app.name') }} — user, merchant, pesanan, dan pendapatan.">
+        <x-page-header eyebrow="Ringkasan" title="Dashboard Admin" description="Kesehatan platform {{ site_name() }} — user, merchant, pesanan, dan pendapatan.">
             <x-slot:actions>
                 <x-ui.button as="a" href="{{ route('admin.merchants.index') }}" icon="ps:buildings">
                     Verifikasi Merchant

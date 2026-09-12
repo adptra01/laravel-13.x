@@ -7,17 +7,24 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} | Marketplace Katering Kantor</title>
+    <title>{{ setting('site_title', site_name().' | Marketplace Katering Kantor') }}</title>
 
     <meta name="description"
-        content="Marketplace katering kantor terpercaya — nasi box, menu sehat, langganan mingguan dari merchant terverifikasi.">
+        content="{{ setting('meta_description', 'Marketplace katering kantor terpercaya — nasi box, menu sehat, langganan mingguan dari merchant terverifikasi.') }}">
 
     <link rel="canonical" href="{{ url()->current() }}">
 
+    @if (setting('meta_keywords'))
+        <meta name="keywords" content="{{ setting('meta_keywords') }}">
+    @endif
+    @if (setting('favicon'))
+        <link rel="icon" type="image/png" href="{{ Storage::url(setting('favicon')) }}">
+    @endif
+
     {{-- OG --}}
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ config('app.name') }}">
-    <meta property="og:title" content="{{ config('app.name') }} | Marketplace Katering Kantor">
+    <meta property="og:site_name" content="{{ site_name() }}">
+    <meta property="og:title" content="{{ setting('site_title', site_name().' | Marketplace Katering Kantor') }}">
     <meta property="og:description" content="Marketplace katering kantor — nasi box, menu sehat, langganan mingguan.">
     <meta property="og:url" content="{{ url()->current() }}">
 
@@ -38,7 +45,7 @@
     {
         "@@context": "https://schema.org",
         "@@type": "Organization",
-        "name": "{{ config('app.name') }}",
+        "name": "{{ site_name() }}",
         "description": "Marketplace katering kantor — nasi box, menu sehat, langganan mingguan."
     }
     </script>
@@ -50,13 +57,16 @@
     <header class="sticky top-0 z-40 border-b border-zinc-200/80 bg-white/90 backdrop-blur-md transition-colors dark:border-zinc-800 dark:bg-zinc-950/90">
         <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
 
-            <a href="{{ url('/') }}" class="group flex items-center gap-2.5" aria-label="Beranda {{ config('app.name') }}">
-                <div
-                    class="grid size-9 place-items-center rounded-md bg-neutral-950">
-                    <x-ui.icon name="ps:fork-knife" class="size-4.5 text-white" />
-                </div>
+            <a href="{{ url('/') }}" class="group flex items-center gap-2.5" aria-label="Beranda {{ site_name() }}">
+                @if (site_logo_url())
+                    <img src="{{ site_logo_url() }}" alt="Logo {{ site_name() }}" class="size-9 rounded-md object-contain" />
+                @else
+                    <div class="grid size-9 place-items-center rounded-md bg-neutral-950">
+                        <x-ui.icon name="ps:fork-knife" class="size-4.5 text-white" />
+                    </div>
+                @endif
                 <div class="flex items-center gap-2 leading-none">
-                    <span class="text-sm font-semibold tracking-tight text-zinc-900 dark:text-white">{{ config('app.name', 'Laravel') }}</span>
+                    <span class="text-sm font-semibold tracking-tight text-zinc-900 dark:text-white">{{ site_name() }}</span>
                 </div>
             </a>
 
@@ -149,7 +159,7 @@
                                 <img src="{{ asset('images/hero-katering.webp') }}"
                                     alt="Nasi box katering untuk makan siang kantor"
                                     width="578" height="432" fetchpriority="high"
-                                    class="aspect-[4/3] w-full rounded-lg border border-zinc-200 bg-zinc-50 object-cover shadow-xs dark:border-zinc-800 dark:bg-zinc-900" />
+                                    class="aspect-[4/3] w-full rounded-lg object-cover shadow-xs  dark:bg-zinc-900" />
                               
                             </figure>
                         </div>

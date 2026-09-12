@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'amount',
     'payment_method',
     'status',
+    'proof_path',
     'metadata',
 ])]
 class Payment extends Model

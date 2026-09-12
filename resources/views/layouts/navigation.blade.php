@@ -1,10 +1,14 @@
 <x-ui.sidebar>
     <x-slot:brand>
-        <x-ui.brand name="{{ config('app.name', 'Laravel') }}" href="{{ auth()->user()?->isMerchant() ? route('merchant.dashboard') : (auth()->user()?->isAdmin() ? route('admin.dashboard') : route('customer.dashboard')) }}">
+        <x-ui.brand name="{{ site_name() }}" href="{{ auth()->user()?->isMerchant() ? route('merchant.dashboard') : (auth()->user()?->isAdmin() ? route('admin.dashboard') : route('customer.dashboard')) }}">
             <x-slot:logo>
-                <span class="grid size-7 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                    <x-ui.icon name="ps:fork-knife" class="size-4" />
-                </span>
+                @if (site_logo_url())
+                    <img src="{{ site_logo_url() }}" alt="Logo {{ site_name() }}" class="size-7 rounded-md object-contain" />
+                @else
+                    <span class="grid size-7 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
+                        <x-ui.icon name="ps:fork-knife" class="size-4 !text-white dark:!text-neutral-900" />
+                    </span>
+                @endif
             </x-slot:logo>
         </x-ui.brand>
     </x-slot:brand>
@@ -67,6 +71,11 @@
                     :active="request()->is('admin/merchants*')" />
                 <x-ui.navlist.item label="Users" icon="ps:users" href="{{ route('users.index') }}"
                     :active="request()->is('users*')" />
+            </x-ui.navlist.group>
+
+            <x-ui.navlist.group label="Situs">
+                <x-ui.navlist.item label="Pengaturan Situs" icon="ps:gear" href="{{ route('admin.settings.edit') }}"
+                    :active="request()->is('admin/settings')" />
             </x-ui.navlist.group>
 
             <x-ui.navlist.group label="Akun">

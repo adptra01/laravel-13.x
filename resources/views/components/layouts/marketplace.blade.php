@@ -4,9 +4,9 @@
 ])
 
 @php
-    $siteName = config('app.name', 'Laravel');
+    $siteName = site_name();
     $pageTitle = $title ? $title.' — '.$siteName : $siteName;
-    $pageDescription = $description ?? 'Temukan dan pesan katering kantor terbaik — nasi box, menu sehat, hingga langganan mingguan dengan harga bersaing.';
+    $pageDescription = $description ?? setting('meta_description', 'Temukan dan pesan katering kantor terbaik — nasi box, menu sehat, hingga langganan mingguan dengan harga bersaing.');
 @endphp
 
 <!DOCTYPE html>
@@ -19,6 +19,12 @@
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
     <meta name="description" content="{{ $pageDescription }}">
+    @if (setting('meta_keywords'))
+        <meta name="keywords" content="{{ setting('meta_keywords') }}">
+    @endif
+    @if (setting('favicon'))
+        <link rel="icon" type="image/png" href="{{ Storage::url(setting('favicon')) }}">
+    @endif
     <link rel="canonical" href="{{ url()->current() }}">
 
     <meta property="og:type" content="website">
@@ -38,9 +44,13 @@
             <div class="flex h-16 items-center gap-3 sm:gap-5">
                 {{-- Logo --}}
                 <a href="{{ route('customer.dashboard') }}" class="flex shrink-0 items-center gap-2.5" aria-label="Beranda {{ $siteName }}">
-                    <span class="grid size-8 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                        <x-ui.icon name="ps:fork-knife" class="size-4" />
-                    </span>
+                    @if (site_logo_url())
+                        <img src="{{ site_logo_url() }}" alt="Logo {{ $siteName }}" class="size-8 rounded-md object-contain" />
+                    @else
+                        <span class="grid size-8 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
+                            <x-ui.icon name="ps:fork-knife" class="size-4 !text-white dark:!text-neutral-900" />
+                        </span>
+                    @endif
                     <span class="hidden text-[15px] font-semibold tracking-tight text-neutral-900 sm:block dark:text-white">
                         {{ $siteName }}
                     </span>
@@ -128,14 +138,34 @@
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="grid size-7 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                            <x-ui.icon name="ps:fork-knife" class="size-3.5" />
-                        </span>
+                        @if (site_logo_url())
+                            <img src="{{ site_logo_url() }}" alt="Logo {{ $siteName }}" class="size-7 rounded-md object-contain" />
+                        @else
+                            <span class="grid size-7 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
+                                <x-ui.icon name="ps:fork-knife" class="size-3.5 !text-white dark:!text-neutral-900" />
+                            </span>
+                        @endif
                         <span class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">{{ $siteName }}</span>
                     </div>
                     <p class="mt-3 max-w-[38ch] text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-                        Marketplace katering untuk kebutuhan makan kantor — harian, mingguan, hingga event besar.
+                        {{ setting('footer_text', 'Marketplace katering untuk kebutuhan makan kantor — harian, mingguan, hingga event besar.') }}
                     </p>
+                    @if (setting('contact_email') || setting('contact_phone'))
+                        <ul class="mt-4 space-y-1.5 text-sm text-neutral-500 dark:text-neutral-400">
+                            @if (setting('contact_email'))
+                                <li class="flex items-center gap-2">
+                                    <x-ui.icon name="ps:envelope-simple" class="size-4 text-neutral-400" />
+                                    <a href="mailto:{{ setting('contact_email') }}" class="transition-colors hover:text-neutral-900 dark:hover:text-white">{{ setting('contact_email') }}</a>
+                                </li>
+                            @endif
+                            @if (setting('contact_phone'))
+                                <li class="flex items-center gap-2">
+                                    <x-ui.icon name="ps:phone" class="size-4 text-neutral-400" />
+                                    <span class="tabular-nums">{{ setting('contact_phone') }}</span>
+                                </li>
+                            @endif
+                        </ul>
+                    @endif
                 </div>
                 <nav aria-label="Navigasi footer">
                     <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-900 dark:text-white">Jelajahi</h3>
