@@ -94,7 +94,7 @@
     <main>
 
         {{-- ======= HERO ======= --}}
-        <section class="relative overflow-hidden border-b border-zinc-200/80 pb-16 pt-12 lg:pb-24 lg:pt-20">
+        <section class="relative overflow-hidden border-b border-zinc-200/80 pb-16 pt-12 lg:pb-24 lg:pt-20 dark:border-zinc-800">
             <div class="mx-auto max-w-6xl px-4 sm:px-6">
                 <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
 
@@ -160,7 +160,7 @@
         </section>
 
         {{-- ======= WHY US — asymmetric: featured + stacked ======= --}}
-        <section id="fitur" class="scroll-mt-20 bg-white py-16 sm:py-20">
+        <section id="fitur" class="scroll-mt-20 bg-white py-16 sm:py-20 dark:bg-zinc-950">
             <div class="mx-auto max-w-6xl px-4 sm:px-6">
                 <div class="mb-12 max-w-2xl">
                     <p class="mb-3 text-[11px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400"># Kenapa kami</p>
@@ -215,7 +215,7 @@
         </section>
 
         {{-- ======= MERCHANTS ======= --}}
-        <section id="katering" class="scroll-mt-20 border-t border-zinc-200/80 bg-zinc-50/50 py-16 sm:py-20">
+        <section id="katering" class="scroll-mt-20 border-t border-zinc-200/80 bg-zinc-50/50 py-16 sm:py-20 dark:border-zinc-800 dark:bg-white/5">
             <div class="mx-auto max-w-6xl px-4 sm:px-6">
                 <div class="mb-8 flex flex-col justify-between sm:flex-row sm:items-end">
                     <div>
@@ -269,7 +269,7 @@
         </section>
 
         {{-- ======= HOW IT WORKS ======= --}}
-        <section id="cara-kerja" class="scroll-mt-20 border-t border-zinc-200 bg-white py-16 sm:py-20">
+        <section id="cara-kerja" class="scroll-mt-20 border-t border-zinc-200 bg-white py-16 sm:py-20 dark:border-zinc-800 dark:bg-zinc-950">
             <div class="mx-auto max-w-6xl px-4 sm:px-6">
                 <div class="grid items-start gap-10 lg:grid-cols-12">
                     <div class="lg:col-span-5">
@@ -304,7 +304,7 @@
         </section>
 
         {{-- ======= CTA — dark band split ======= --}}
-        <section class="border-t border-zinc-200 bg-zinc-50/50 py-16 sm:py-20">
+        <section class="border-t border-zinc-200 bg-zinc-50/50 py-16 sm:py-20 dark:border-zinc-800 dark:bg-white/5">
             <div class="mx-auto max-w-6xl px-4 sm:px-6">
                 <div class="grid gap-8 overflow-hidden rounded-xl border border-zinc-900 bg-zinc-950 p-8 text-white sm:p-10 lg:grid-cols-[1.5fr_1fr] lg:gap-12 dark:border-white/10">
                     <div>
