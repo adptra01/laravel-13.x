@@ -22,14 +22,31 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      * Redirect mengikuti peran akun: merchant, customer, atau admin.
+     * URL tujuan basi (url.intended) hanya dihormati bila berada di area
+     * peran yang sama — mencegah customer/merchant terlempar ke /admin.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
+        $user = $request->user();
+        $dashboard = $this->dashboardFor($user);
+
+        $allowedPrefix = match ($user->role) {
+            'merchant' => '/merchant',
+            'admin' => '/admin',
+            default => '/customer',
+        };
+
+        $intended = $request->session()->get('url.intended');
+        $target = ($intended && str_starts_with($intended, $allowedPrefix))
+            ? $intended
+            : $dashboard;
+
+        $request->session()->forget('url.intended');
         $request->session()->regenerate();
 
-        return redirect()->intended($this->dashboardFor($request->user()));
+        return redirect()->to($target);
     }
 
     /**

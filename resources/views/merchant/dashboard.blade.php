@@ -21,10 +21,10 @@
             </x-slot:actions>
         </x-page-header>
 
-        {{-- Metrics: hairline grid, pendapatan sebagai tile featured --}}
+        {{-- Metrics: hairline grid --}}
         <div class="grid grid-cols-2 gap-px overflow-hidden rounded-box border border-neutral-200/70 bg-neutral-200/70 lg:grid-cols-4 dark:border-white/10 dark:bg-white/10">
             <div class="bg-white dark:bg-neutral-900"><x-stat icon="ps:shopping-cart" :value="number_format($metrics['orders_today'])" label="Pesanan Hari Ini" /></div>
-            <div class="bg-neutral-950"><x-stat dark icon="ps:money" :value="'Rp '.number_format($metrics['revenue_today'], 0, ',', '.')" label="Pendapatan Hari Ini" /></div>
+            <div class="bg-white dark:bg-neutral-900"><x-stat icon="ps:money" :value="'Rp '.number_format($metrics['revenue_today'], 0, ',', '.')" label="Pendapatan Hari Ini" /></div>
             <div class="bg-white dark:bg-neutral-900"><x-stat icon="ps:clipboard-text" :value="number_format($metrics['active_menus'])" label="Menu Aktif" /></div>
             <a href="{{ route('merchant.orders.index', ['status' => 'pending']) }}" class="block bg-white transition-colors hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-white/5">
                 <x-stat icon="ps:clock" :value="number_format($metrics['pending_orders'])" label="Menunggu Konfirmasi" />

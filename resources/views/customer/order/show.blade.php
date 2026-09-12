@@ -1,5 +1,5 @@
 <x-layouts.marketplace title="Detail Pesanan #{{ $order->id }}">
-    <div class="mx-auto max-w-4xl space-y-6">
+    <div class="mx-auto space-y-6">
 
         {{-- Header --}}
         <header class="rounded-box border border-neutral-200/70 bg-white dark:bg-neutral-900 dark:border-white/10 p-6 shadow-sm">

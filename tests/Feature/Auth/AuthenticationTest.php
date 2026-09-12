@@ -56,6 +56,34 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(route('admin.dashboard', absolute: false));
     }
 
+    public function test_stale_intended_url_from_another_role_does_not_hijack_the_redirect(): void
+    {
+        $customer = User::factory()->create(['role' => 'customer']);
+
+        // Skenario: session menyimpan tujuan basi ke area admin (mis. sesi
+        // admin sebelumnya kedaluwarsa di /admin), lalu user login customer.
+        $response = $this->withSession(['url.intended' => '/admin'])->post('/login', [
+            'email' => $customer->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertRedirect(route('customer.dashboard', absolute: false));
+    }
+
+    public function test_valid_intended_url_within_the_same_role_is_honored(): void
+    {
+        $customer = User::factory()->create(['role' => 'customer']);
+
+        $response = $this->withSession(['url.intended' => '/customer/invoices'])->post('/login', [
+            'email' => $customer->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertRedirect('/customer/invoices');
+    }
+
     public function test_users_can_not_authenticate_with_invalid_password(): void
     {
         $user = User::factory()->create();
