@@ -1,80 +1,208 @@
-# Laravel + Sheaf UI Starter Kit
+# KateringKu — Platform Marketplace Katering (Laravel)
 
-Personal Laravel starter kit dengan Sheaf UI component library, Tailwind CSS v4, Livewire, dan authentication scaffolding.
+**KateringKu** adalah aplikasi berbasis Laravel yang dirancang untuk menghubungkan penyedia jasa katering (**Merchant**) dengan pelanggan (**Customer**), serta menyediakan panel kontrol untuk pengelola sistem (**Admin**).
 
-## Tech Stack
+---
 
-- **Laravel 13.x** — PHP 8.3+
-- **Sheaf UI** — Component library (button, sidebar, navlist, badge, brand, navbar, avatar, dropdown, theme-switcher, kbd)
-- **Tailwind CSS v4** — Utility-first CSS
-- **Livewire 4.4** — Reactive components
-- **Alpine.js** — Lightweight JavaScript
-- **Vite 8** — Build tool
+## 🚀 Fitur Utama
 
-## Features
+* **Multi-Role Access**
+  Mendukung hak akses terpisah untuk **Admin**, **Merchant**, dan **Customer**.
 
-- Authentication (login, register, forgot/reset password, email verification)
-- Profile management (edit profile, update password, delete account)
-- Responsive sidebar layout
-- Dark mode support
-- Sheaf UI components throughout
+* **Verifikasi Merchant**
+  Menyediakan alur persetujuan akun Merchant oleh Admin sebelum merchant dan produknya dapat ditampilkan secara publik.
 
-## Setup
+* **Katalog & Manajemen Menu**
+  Merchant dapat mengelola menu makanan, stok, harga, dan kategori.
+
+* **Pencarian & Pemesanan**
+  Customer dapat mendaftar, menjelajahi merchant yang telah terverifikasi, dan melakukan pemesanan.
+
+* **Storage & Automatic Seeding**
+  Seeder dapat mengunduh gambar sampel secara otomatis untuk kebutuhan demo aplikasi.
+
+---
+
+## 📋 Akun Demo
+
+Seluruh akun demo menggunakan password default:
+
+```text
+password
+```
+
+| Role           | Email                   | Status / Keterangan                       |
+| -------------- | ----------------------- | ----------------------------------------- |
+| **Admin**      | `admin@testing.com`     | Pengelola platform & verifikasi merchant  |
+| **Merchant 1** | `merchant1@testing.com` | Dapur Nusantara Catering — **Verified**   |
+| **Merchant 2** | `merchant2@testing.com` | Sehat Rasa Catering — **Verified**        |
+| **Merchant 3** | `merchant3@testing.com` | Catering Prima — **Pending Verification** |
+| **Customer**   | `customer@testing.com`  | Rina Kusuma (PT Maju Jaya)                |
+
+---
+
+## 🛠️ Panduan Instalasi
+
+Tersedia dua metode instalasi. Pilih metode yang sesuai dengan lingkungan pengembangan yang digunakan.
+
+### Prasyarat
+
+Pastikan perangkat pengembangan telah memiliki:
+
+* PHP
+* Composer
+* Node.js & NPM
+* MySQL atau database yang kompatibel
+* Git
+
+Untuk metode **DDEV**, pastikan DDEV telah terpasang dan dapat digunakan dari terminal.
+
+---
+
+## Cara 1 — Menggunakan DDEV (Rekomendasi)
+
+Jika menggunakan [DDEV](https://ddev.readthedocs.io/), ikuti langkah berikut.
+
+### 1. Clone Repository
 
 ```bash
-# Clone
-git clone <repo-url>
+git clone https://github.com/adptra01/laravel-13.x.git
 cd laravel-13.x
+```
 
-# Install dependencies
-composer install
+### 2. Start DDEV Environment
+
+```bash
+ddev start
+```
+
+### 3. Install Dependencies
+
+```bash
+ddev composer install
 npm install
-
-# Environment
-cp .env.example .env
-php artisan key:generate
-
-# Database
-php artisan migrate
-
-# Build assets
 npm run build
+```
 
-# Serve
+### 4. Konfigurasi Environment
+
+Pastikan file `.env` tersedia dan konfigurasi database sesuai dengan environment DDEV.
+
+Kemudian generate application key:
+
+```bash
+ddev exec php artisan key:generate
+```
+
+### 5. Migrasi Database & Seeding
+
+Untuk membuat database dari awal sekaligus memasukkan data demo:
+
+```bash
+ddev exec php artisan migrate:fresh --seed
+```
+
+### 6. Buat Storage Link
+
+```bash
+ddev exec php artisan storage:link
+```
+
+### 7. Akses Aplikasi
+
+Buka browser dan kunjungi:
+
+```text
+https://laravel-test.ddev.site:8443
+```
+
+> **Catatan:** URL di atas mengikuti konfigurasi hostname/port DDEV pada project. Jika konfigurasi DDEV berbeda, gunakan URL yang ditampilkan oleh perintah `ddev describe`.
+
+---
+
+## Cara 2 — Setup Manual / Local Environment
+
+Metode ini dapat digunakan jika menjalankan aplikasi secara langsung menggunakan PHP, Composer, MySQL, dan Node.js tanpa DDEV.
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/adptra01/laravel-13.x.git
+cd laravel-13.x
+```
+
+### 2. Install PHP Dependencies
+
+```bash
+composer install
+```
+
+### 3. Install & Build Frontend Assets
+
+```bash
+npm install
+npm run build
+```
+
+### 4. Konfigurasi Environment
+
+Salin `.env.example` menjadi `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Kemudian generate application key:
+
+```bash
+php artisan key:generate
+```
+
+Sesuaikan konfigurasi database pada file `.env`, misalnya:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Migrasi Database & Seeding
+
+Untuk membuat database dari awal sekaligus memasukkan data demo:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 6. Buat Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 7. Jalankan Development Server
+
+```bash
 php artisan serve
 ```
 
-## Available Sheaf UI Components
+Aplikasi dapat diakses melalui:
 
-- `<x-ui.button>` — Button (primary, outline, ghost, danger variants)
-- `<x-ui.sidebar>` — Sidebar layout
-- `<x-ui.navlist>` — Navigation list
-- `<x-ui.navbar>` — Top navbar
-- `<x-ui.brand>` — Brand/logo
-- `<x-ui.badge>` — Badge
-- `<x-ui.avatar>` — Avatar
-- `<x-ui.dropdown>` — Dropdown menu
-- `<x-ui.theme-switcher>` — Dark/light mode toggle
-- `<x-ui.kbd>` — Keyboard shortcut display
-- `<x-ui.icon>` — Icon component
-
-## Structure
-
-```
-resources/
-├── views/
-│   ├── auth/           # Authentication views
-│   ├── components/     # Breeze + Sheaf UI components
-│   │   └── ui/         # Sheaf UI component library
-│   ├── layouts/        # App & guest layouts
-│   └── profile/        # Profile management
-├── css/
-│   ├── app.css         # Tailwind v4 entry
-│   └── theme.css       # Sheaf UI theme tokens
-└── js/
-    └── app.js          # Alpine.js + Livewire
+```text
+http://127.0.0.1:8000
 ```
 
-## License
+---
 
-MIT
+## 📝 Catatan Pengembang
+
+### Sistem Seeding Gambar
+
+Gambar produk dan banner yang digunakan oleh seeder diunduh secara otomatis melalui jaringan.
+
+Apabila proses pengunduhan gagal karena masalah koneksi atau sumber gambar tidak dapat diakses, proses seeding akan tetap dilanjutkan tanpa menghentikan keseluruhan proses (**graceful fallback**).
+
+> Pastikan koneksi internet tersedia ketika menjalankan seeding jika ingin mendapatkan gambar sampel secara lengkap.
