@@ -36,14 +36,15 @@
                                 } }}</x-ui.badge>
                             </x-ui.table.cell>
                             <x-ui.table.cell>
-                                <div class="flex items-center justify-end gap-3 text-sm">
-                                    <a href="{{ route('customer.invoices.show', $invoice) }}" class="font-medium text-neutral-900 dark:text-white underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-400 dark:hover:text-neutral-300">
-                                        Detail
+                                 <div class="flex items-center justify-end gap-3">
+                                    <a href="{{ route('customer.invoices.show', $invoice) }}" class="inline-flex items-center gap-1 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
+                                        <x-ui.icon name="ps:eye" class="size-4" /> Detail
                                     </a>
-                                    <a href="{{ route('customer.invoices.download', $invoice) }}" class="inline-flex items-center gap-1 text-neutral-500 dark:text-neutral-400 transition-colors hover:text-neutral-900 dark:text-white dark:hover:text-white">
-                                        <x-ui.icon name="ps:download-simple" class="size-4" /> PDF
+                                    <a href="{{ route('customer.invoices.download', $invoice) }}" class="inline-flex items-center gap-1 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
+                                        <x-ui.icon name="ps:download-simple" class="size-4" /> Unduh
                                     </a>
                                 </div>
+                              
                             </x-ui.table.cell>
                         </x-ui.table.row>
                     @empty

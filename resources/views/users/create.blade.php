@@ -4,7 +4,7 @@
 
         <x-page-header eyebrow="Kelola" title="Tambah Pengguna" description="Isi detail di bawah untuk membuat akun pengguna baru." />
 
-        <div class="max-w-2xl overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
+        <div class=" overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <form method="POST" action="{{ route('users.store') }}" class="space-y-4 p-6">
                 @csrf
 

@@ -37,7 +37,7 @@
                             <x-ui.table.cell>
                                 <div class="flex items-center justify-end gap-3">
                                     <a href="{{ route('merchant.invoices.show', $invoice) }}" class="inline-flex items-center gap-1 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
-                                        <x-ui.icon name="ps:eye" class="size-4" /> Detail
+                il                        <x-ui.icon name="ps:eye" class="size-4" /> Detail
                                     </a>
                                     <a href="{{ route('merchant.invoices.download', $invoice) }}" class="inline-flex items-center gap-1 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
                                         <x-ui.icon name="ps:download-simple" class="size-4" /> Unduh

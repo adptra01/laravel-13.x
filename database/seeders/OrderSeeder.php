@@ -293,7 +293,7 @@ class OrderSeeder extends Seeder
         $path = "payment-proofs/{$seed}.png";
 
         $url = 'https://dummyimage.com/600x400/eeeeee/333333.png'
-            . '?text=' . urlencode('BUKTI PEMBAYARAN');
+            .'?text='.urlencode('BUKTI PEMBAYARAN');
 
         return $this->fetchImage($url, $path);
     }
