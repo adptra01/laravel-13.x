@@ -26,7 +26,7 @@
 
             <x-ui.table :paginator="$users">
                 <x-ui.table.header>
-                    <x-ui.table.head @if ($sort === 'name') aria-sort="{{ $direction === 'asc' ? 'ascending' : 'descending' }}" @endif>
+                    <x-ui.table.head :aria-sort="$sort === 'name' ? ($direction === 'asc' ? 'ascending' : 'descending') : null">
                         <a href="{{ route('users.index', ['sort' => 'name', 'direction' => $sort === 'name' && $direction === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}"
                             class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white">
                             Pengguna
@@ -35,7 +35,7 @@
                             @endif
                         </a>
                     </x-ui.table.head>
-                    <x-ui.table.head @if ($sort === 'email') aria-sort="{{ $direction === 'asc' ? 'ascending' : 'descending' }}" @endif>
+                    <x-ui.table.head :aria-sort="$sort === 'email' ? ($direction === 'asc' ? 'ascending' : 'descending') : null">
                         <a href="{{ route('users.index', ['sort' => 'email', 'direction' => $sort === 'email' && $direction === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}"
                             class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white">
                             Email
@@ -44,7 +44,7 @@
                             @endif
                         </a>
                     </x-ui.table.head>
-                    <x-ui.table.head @if ($sort === 'created_at') aria-sort="{{ $direction === 'asc' ? 'ascending' : 'descending' }}" @endif>
+                    <x-ui.table.head :aria-sort="$sort === 'created_at' ? ($direction === 'asc' ? 'ascending' : 'descending') : null">
                         <a href="{{ route('users.index', ['sort' => 'created_at', 'direction' => $sort === 'created_at' && $direction === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}"
                             class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white">
                             Bergabung

@@ -4,7 +4,7 @@
 
         <x-page-header eyebrow="Kelola" title="Ubah Pengguna" description="Perbarui detail akun {{ $user->name }}. Kosongkan password jika tidak ingin mengubahnya." />
 
-        <div class="max-w-2xl overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
+        <div class="overflow-hidden rounded-box border border-neutral-200/70 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
             <form method="POST" action="{{ route('users.update', $user) }}" class="space-y-4 p-6">
                 @csrf
                 @method('PUT')

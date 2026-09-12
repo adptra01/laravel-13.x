@@ -91,7 +91,7 @@
                 <p class="text-xs text-neutral-400">Invoice ini terbit otomatis saat pesanan dibuat.</p>
             </div>
 
-            @include('customer.partials.proof-upload-modal')
+            @include('customer.partials.proof-upload-modal', ['order' => $invoice->order])
         @endif
 
         @if ($invoice->order?->payments->whereNotNull('proof_path')->isNotEmpty())
