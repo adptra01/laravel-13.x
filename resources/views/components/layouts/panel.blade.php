@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +18,7 @@
     @include('components.fonts')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-neutral-50 font-sans antialiased dark:bg-neutral-950">
     <x-ui.layout>
         @include('layouts.navigation')
@@ -30,10 +32,12 @@
                                 $unreadNotifications = auth()->user()->unreadNotifications;
                             @endphp
                             <x-ui.dropdown position="bottom-end" class="shrink-0">
-                                <x-slot:button class="relative justify-center" aria-label="Notifikasi{{ $unreadNotifications->isNotEmpty() ? ' — '.$unreadNotifications->count().' belum dibaca' : '' }}">
+                                <x-slot:button class="relative justify-center"
+                                    aria-label="Notifikasi{{ $unreadNotifications->isNotEmpty() ? ' — ' . $unreadNotifications->count() . ' belum dibaca' : '' }}">
                                     <x-ui.icon name="ps:bell" class="size-5" />
                                     @if ($unreadNotifications->isNotEmpty())
-                                        <span class="absolute -right-0.5 -top-0.5 grid min-w-[1rem] place-items-center rounded-full bg-red-500 px-1 text-[9px] font-semibold leading-4 text-white tabular-nums">{{ $unreadNotifications->count() }}</span>
+                                        <span
+                                            class="absolute -right-0.5 -top-0.5 grid min-w-[1rem] place-items-center rounded-full bg-red-500 px-1 text-[9px] font-semibold leading-4 text-white tabular-nums">{{ $unreadNotifications->count() }}</span>
                                     @endif
                                 </x-slot:button>
                                 <x-slot:menu class="w-80">
@@ -42,7 +46,9 @@
                                         @if ($unreadNotifications->isNotEmpty())
                                             <form method="POST" action="{{ route('merchant.notifications.read') }}">
                                                 @csrf
-                                                <button type="submit" class="text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-white">Tandai dibaca</button>
+                                                <button type="submit"
+                                                    class="text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-white">Tandai
+                                                    dibaca</button>
                                             </form>
                                         @endif
                                     </div>
@@ -50,8 +56,12 @@
                                     @forelse ($unreadNotifications->take(5) as $notification)
                                         <x-ui.dropdown.item class="pointer-events-none">
                                             <div class="flex min-w-0 flex-col">
-                                                <span class="text-sm font-medium text-neutral-900 dark:text-white">Pesanan baru #{{ $notification->data['order_id'] ?? '-' }}</span>
-                                                <span class="text-xs text-neutral-500">Dari {{ $notification->data['customer_name'] ?? 'customer' }} · Rp {{ number_format($notification->data['total'] ?? 0, 0, ',', '.') }} · {{ $notification->created_at->diffForHumans() }}</span>
+                                                <span class="text-sm font-medium text-neutral-900 dark:text-white">Pesanan baru
+                                                    #{{ $notification->data['order_id'] ?? '-' }}</span>
+                                                <span class="text-xs text-neutral-500">Dari
+                                                    {{ $notification->data['customer_name'] ?? 'customer' }} · Rp
+                                                    {{ number_format($notification->data['total'] ?? 0, 0, ',', '.') }} ·
+                                                    {{ $notification->created_at->diffForHumans() }}</span>
                                             </div>
                                         </x-ui.dropdown.item>
                                     @empty
@@ -61,24 +71,33 @@
                             </x-ui.dropdown>
                         @endif
 
+                        <x-layouts.switch-account variant="inline" />
+
                         <x-ui.theme-switcher variant="inline" />
+
                         <x-ui.dropdown position="bottom-end">
-                            <x-slot:button class="justify-center" aria-label="Menu akun">
+                            <x-slot:button class="justify-center" icon="ps:sign-out" aria-label="Menu akun">
                                 <x-ui.avatar size="sm" circle :name="auth()->user()->name ?? ''" />
                             </x-slot:button>
+
+
                             <x-slot:menu class="w-64">
-                                <x-ui.dropdown.group label="Masuk sebagai">
-                                    <x-ui.dropdown.item class="pointer-events-none">
-                                        <div class="flex flex-col">
-                                            <span class="font-medium text-sm text-neutral-900 dark:text-white">{{ auth()->user()->name }}</span>
-                                            <span class="text-xs text-neutral-500">{{ auth()->user()->email }}</span>
-                                        </div>
-                                    </x-ui.dropdown.item>
-                                </x-ui.dropdown.group>
+                                <x-ui.dropdown.item href="{{ route('profile.edit') }}" icon="ps:user">
+                                    <div class="flex flex-col text-left">
+                                        <span
+                                            class="text-sm font-medium text-neutral-900 dark:text-white">{{ auth()->user()->name }}</span>
+                                        <span class="text-xs text-neutral-500">{{ auth()->user()->email }}</span>
+                                    </div>
+                                </x-ui.dropdown.item>
                                 <x-ui.dropdown.separator />
+
+                                <x-ui.dropdown.item href="{{ route('profile.edit') }}" icon="ps:buildings">
+                                    Profil Akun
+                                </x-ui.dropdown.item>
                                 <form method="POST" action="{{ route('logout') }}" class="contents">
                                     @csrf
-                                    <x-ui.dropdown.item as="button" icon="ps:sign-out" onclick="event.preventDefault();this.closest('form').submit();">
+                                    <x-ui.dropdown.item as="button" icon="ps:sign-out"
+                                        onclick="event.preventDefault();this.closest('form').submit();">
                                         Keluar
                                     </x-ui.dropdown.item>
                                 </form>
@@ -94,4 +113,5 @@
         </x-ui.layout.main>
     </x-ui.layout>
 </body>
+
 </html>

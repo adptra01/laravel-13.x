@@ -23,7 +23,7 @@
 
                 <a href="/" class="relative flex items-center gap-2.5" aria-label="Beranda {{ site_name() }}">
                     <span class="grid size-9 place-items-center rounded-md bg-white dark:bg-neutral-900 text-neutral-950">
-                        <x-ui.icon name="ps:fork-knife" class="size-4.5 !text-neutral-950" />
+                        <x-ui.icon name="building-storefront" class="size-4.5 !text-neutral-950" />
                     </span>
                     <span class="text-lg font-semibold tracking-tight text-white">{{ site_name() }}</span>
                    
@@ -63,7 +63,7 @@
                 <div class="w-full max-w-md">
                     <a href="/" class="mb-8 inline-flex items-center gap-2 lg:hidden">
                         <span class="grid size-9 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                            <x-ui.icon name="ps:fork-knife" class="size-4.5 !text-neutral-950" />
+                            <x-ui.icon name="building-storefront" class="size-4.5 !text-neutral-950" />
                         </span>
                         <span class="text-lg font-semibold tracking-tight text-neutral-900 dark:text-white">{{ site_name() }}</span>
                     </a>

@@ -6,7 +6,7 @@
                     <img src="{{ site_logo_url() }}" alt="Logo {{ site_name() }}" class="size-7 rounded-md object-contain" />
                 @else
                     <span class="grid size-7 place-items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                        <x-ui.icon name="ps:fork-knife" class="size-4 !text-white dark:!text-neutral-900" />
+                        <x-ui.icon name="building-storefront" class="size-4 !text-white dark:!text-neutral-900" />
                     </span>
                 @endif
             </x-slot:logo>
@@ -78,10 +78,6 @@
                     :active="request()->is('admin/settings')" />
             </x-ui.navlist.group>
 
-            <x-ui.navlist.group label="Akun">
-                <x-ui.navlist.item label="Profile" icon="ps:user-circle" href="{{ route('profile.edit') }}"
-                    :active="request()->is('profile')" />
-            </x-ui.navlist.group>
         </x-ui.navlist>
     @endif
 

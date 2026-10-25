@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6307d9b48ffdcb33b3b0fd8f044a1b5",
+    "content-hash": "3a602e51fe1c850c5f8a6cd1e054268e",
     "packages": [
         {
             "name": "brick/math",
@@ -643,6 +643,100 @@
                 }
             ],
             "time": "2026-08-24T09:06:52+00:00"
+        },
+        {
+            "name": "grazulex/laravel-multipersona",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grazulex/laravel-multipersona.git",
+                "reference": "645760c90539f9ff6bcad84fab27038b84d54b09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grazulex/laravel-multipersona/zipball/645760c90539f9ff6bcad84fab27038b84d54b09",
+                "reference": "645760c90539f9ff6bcad84fab27038b84d54b09",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^12.0|^13.0",
+                "nesbot/carbon": "^3.10",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^4.2",
+                "larastan/larastan": "^3.4",
+                "laravel/pint": "^1.22",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^3.8|^4.0",
+                "pestphp/pest-plugin-laravel": "^3.2|^4.0",
+                "rector/rector": "^2.0"
+            },
+            "suggest": {
+                "doctrine/dbal": "Required for database operations and migrations"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Grazulex\\LaravelMultiPersona\\LaravelMultiPersonaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Grazulex\\LaravelMultiPersona\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-Marc Strauven",
+                    "email": "jms@grazulex.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel MultiPersona is a lightweight context-layer system for Laravel users. It allows a single user to switch between different roles, accounts, or tenants dynamically, without creating multiple logins or sessions.",
+            "homepage": "https://github.com/grazulex/laravel-multipersona",
+            "keywords": [
+                "Context",
+                "Persona",
+                "laravel",
+                "middleware",
+                "multipersona",
+                "pest",
+                "php8",
+                "roles",
+                "tenants"
+            ],
+            "support": {
+                "docs": "https://github.com/Grazulex/laravel-multipersona/wiki",
+                "forum": "https://github.com/Grazulex/laravel-multipersona/discussions",
+                "issues": "https://github.com/Grazulex/laravel-multipersona/issues",
+                "source": "https://github.com/Grazulex/laravel-multipersona",
+                "wiki": "https://github.com/Grazulex/laravel-multipersona/wiki"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/Grazulex",
+                    "type": "buy_me_a_coffee"
+                },
+                {
+                    "url": "https://paypal.me/strauven",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Grazulex",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-10-08T09:37:33+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

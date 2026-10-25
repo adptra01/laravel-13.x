@@ -13,6 +13,7 @@ use App\Http\Controllers\Customer\SearchController;
 use App\Http\Controllers\Merchant\DashboardController as MerchantDashboardController;
 use App\Http\Controllers\Merchant\InvoiceController as MerchantInvoiceController;
 use App\Http\Controllers\Merchant\MenuController;
+use App\Http\Controllers\Merchant\NotificationController;
 use App\Http\Controllers\Merchant\OrderController as MerchantOrderController;
 use App\Http\Controllers\Merchant\ProfileController as MerchantProfileController;
 use App\Http\Controllers\Merchant\ReportController;
@@ -20,7 +21,12 @@ use App\Http\Controllers\Merchant\ReviewController as MerchantReviewController;
 use App\Http\Controllers\UserController;
 use App\Models\Menu;
 use App\Models\Merchant;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     $featuredMerchants = Merchant::where('verification_status', 'verified')
@@ -62,7 +68,7 @@ Route::resource('users', UserController::class)->except('show')->middleware(['au
 Route::prefix('merchant')->name('merchant.')->middleware(['auth', 'verified', 'role.merchant'])->group(function () {
     Route::get('/', MerchantDashboardController::class)->name('dashboard');
 
-    Route::post('notifications/read', [MerchantNotificationController::class, 'markAllRead'])
+    Route::post('notifications/read', [NotificationController::class, 'markAllRead'])
         ->name('notifications.read');
 
     Route::get('/profile', [MerchantProfileController::class, 'edit'])->name('profile.edit');
@@ -123,4 +129,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role.ad
     Route::post('merchants/{merchant}/reapply', [AdminMerchantController::class, 'reapply'])->name('merchants.reapply');
 });
 
-require __DIR__.'/auth.php';
+Route::post('/dev/switch-account', function (Request $request) {
+    abort_unless(app()->environment('local'), 404);
+
+    $data = $request->validate(['email' => 'required|email|exists:users,email']);
+    $redirects = [
+        'admin@testing.com' => '/admin',
+        'customer@testing.com' => '/',
+        'merchant1@testing.com' => '/merchant',
+        'merchant2@testing.com' => '/merchant',
+        'merchant3@testing.com' => '/merchant',
+    ];
+
+    Auth::login(User::where('email', $data['email'])->firstOrFail(), true);
+    $request->session()->regenerate();
+
+    return redirect($redirects[$data['email']] ?? '/');
+})->name('dev.switch-account');

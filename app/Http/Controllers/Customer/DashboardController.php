@@ -32,4 +32,3 @@ class DashboardController extends Controller
         return view('customer.dashboard', compact('customer', 'recommended', 'popular', 'recentOrders'));
     }
 }
-

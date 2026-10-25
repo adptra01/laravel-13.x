@@ -62,7 +62,7 @@
                     <img src="{{ site_logo_url() }}" alt="Logo {{ site_name() }}" class="size-9 rounded-md object-contain" />
                 @else
                     <div class="grid size-9 place-items-center rounded-md bg-neutral-950">
-                        <x-ui.icon name="ps:fork-knife" class="size-4.5 text-white" />
+                        <x-ui.icon name="building-storefront" class="size-4.5 text-white" />
                     </div>
                 @endif
                 <div class="flex items-center gap-2 leading-none">
