@@ -16,7 +16,6 @@ class DashboardController extends Controller
 
         $recommended = Merchant::where('verification_status', 'verified')
             ->withCount('menus')
-            ->having('menus_count', '>', 0)
             ->orderByDesc('menus_count')
             ->limit(4)
             ->get();
@@ -33,3 +32,4 @@ class DashboardController extends Controller
         return view('customer.dashboard', compact('customer', 'recommended', 'popular', 'recentOrders'));
     }
 }
+
